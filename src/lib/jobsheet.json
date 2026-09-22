@@ -1,0 +1,2853 @@
+[
+  {
+    "type": "p",
+    "text": "PERSIAPAN SERKOM • REKAYASA PERANGKAT LUNAK"
+  },
+  {
+    "type": "p",
+    "text": "JOBSHEET PEMBELAJARAN\nPEMROGRAM JUNIOR"
+  },
+  {
+    "type": "p",
+    "text": "Membangun Landing Page Kopi Ulee Kareng\ndengan CRUD Produk Menggunakan Laravel 12"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "1 HARI\nmode latihan terpadu",
+        "LARAVEL 12\nPHP 8.2 + MySQL",
+        "1 TABEL\nlanding page + CRUD"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "IDENTITAS",
+        "KETERANGAN"
+      ],
+      [
+        "Skema",
+        "Pemrogram Junior (Junior Coder)"
+      ],
+      [
+        "Nomor skema sekolah",
+        "016/SKEMA-PJ/RPL/2025"
+      ],
+      [
+        "Program keahlian",
+        "Pengembangan Perangkat Lunak dan Gim / RPL"
+      ],
+      [
+        "Satuan pendidikan",
+        "SMK Negeri 5 Telkom Banda Aceh"
+      ],
+      [
+        "Penyusun",
+        "Raeza Maulana, S.Pd."
+      ],
+      [
+        "Acuan",
+        "SKKNI 282 Tahun 2016 dan perangkat MUK sekolah/LSP"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "POSISI DOKUMEN\nJobsheet ini adalah bahan pembelajaran dan simulasi persiapan serkom. Keputusan kompeten/belum kompeten resmi tetap menjadi kewenangan asesor dan LSP berdasarkan skema serta MUK yang telah disahkan."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Kendali Dokumen dan Identitas Peserta"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Komponen",
+        "Isi"
+      ],
+      [
+        "Kode dokumen",
+        "JOB-JC-LRV12-KUK-01"
+      ],
+      [
+        "Nama dokumen",
+        "Jobsheet Pembelajaran Persiapan SERKOM RPL - Laravel 12"
+      ],
+      [
+        "Versi",
+        "1.0"
+      ],
+      [
+        "Tahun",
+        "2026"
+      ],
+      [
+        "Status",
+        "Bahan pembelajaran dan simulasi; validasi formal mengikuti LSP"
+      ],
+      [
+        "Target",
+        "Siswa RPL yang telah mengenal HTML, CSS, PHP, database, dan Laravel dasar"
+      ],
+      [
+        "Durasi",
+        "Latihan terpadu 1 hari (8 JP) atau simulasi asesmen 270 menit"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Identitas peserta",
+        "Isian"
+      ],
+      [
+        "Nama",
+        "................................................................................................"
+      ],
+      [
+        "Kelas",
+        "................................................................................................"
+      ],
+      [
+        "Nomor peserta",
+        "................................................................................................"
+      ],
+      [
+        "Tanggal praktik",
+        "................................................................................................"
+      ],
+      [
+        "Nama guru/asesor",
+        "................................................................................................"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Cara Menggunakan Jobsheet"
+  },
+  {
+    "type": "p",
+    "text": "1. Baca skenario, spesifikasi, batasan proyek, dan hasil yang harus diserahkan sebelum mengetik kode."
+  },
+  {
+    "type": "p",
+    "text": "2. Kerjakan setiap langkah secara berurutan. Jangan melanjutkan sebelum checkpoint pada langkah tersebut terpenuhi."
+  },
+  {
+    "type": "p",
+    "text": "3. Ketik kode sendiri, jalankan, amati hasilnya, kemudian catat bukti. Menyalin tanpa memahami belum menunjukkan kompetensi."
+  },
+  {
+    "type": "p",
+    "text": "4. Saat terjadi error, catat pesan, file, dan barisnya sebelum memperbaiki kode. Proses debugging merupakan bagian penting dari bukti serkom."
+  },
+  {
+    "type": "p",
+    "text": "5. Lengkapi tabel pengujian, log pengerjaan, checklist portofolio, dan refleksi pada bagian akhir."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "ATURAN BANTUAN\nGuru boleh mengklarifikasi instruksi dan memulihkan gangguan infrastruktur. Guru tidak mengambil alih keyboard atau menulis solusi inti ketika kegiatan digunakan sebagai simulasi asesmen."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Peta Isi"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Bagian",
+        "Fokus"
+      ],
+      [
+        "1",
+        "Posisi terhadap SKKNI dan MUK"
+      ],
+      [
+        "2",
+        "Skenario, hasil akhir, dan batasan proyek"
+      ],
+      [
+        "3",
+        "Persiapan perangkat dan proyek Laravel 12"
+      ],
+      [
+        "4",
+        "Analisis kebutuhan dan perancangan database"
+      ],
+      [
+        "5",
+        "Pembuatan migration, model, seeder, controller, dan route"
+      ],
+      [
+        "6",
+        "Pembuatan landing page dan seluruh halaman CRUD"
+      ],
+      [
+        "7",
+        "Debugging, pengujian manual, dan feature test"
+      ],
+      [
+        "8",
+        "Dokumentasi, portofolio, presentasi, dan pengumpulan"
+      ],
+      [
+        "9",
+        "Penilaian pembelajaran dan kesiapan serkom"
+      ],
+      [
+        "Lampiran",
+        "Troubleshooting, PMO, log, lembar uji, dan checklist"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "1. Posisi Jobsheet terhadap SKKNI dan MUK"
+  },
+  {
+    "type": "p",
+    "text": "Jobsheet ini memadukan satu proyek Laravel sederhana dengan kompetensi pemrograman, dokumentasi, debugging, dan pengujian. Pemetaan dibuat agar kegiatan belajar dapat ditelusuri ke SKKNI 282 Tahun 2016, tetapi status administratif setiap unit harus mengikuti skema LSP yang berlaku."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "TEMUAN PENTING PADA MUK SEKOLAH\nFR.APL.02, FR.IA.01, dan FR.IA.02 skema 016/SKEMA-PJ/RPL/2025 yang dipelajari saat ini memuat satu unit langsung, yaitu J.620100.033.02. MUK menuliskan judul 'Melakukan pengujian perangkat lunak', sedangkan judul pada SKKNI adalah 'Melaksanakan Pengujian Unit Program'. Jobsheet menggunakan judul SKKNI dan tidak dianggap mengubah MUK resmi. Penyeragaman judul/kode harus divalidasi melalui LSP sebelum asesmen resmi."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "1.1 Peta Unit Pembelajaran"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "ID",
+        "Kode unit",
+        "Judul unit",
+        "Status dalam jobsheet"
+      ],
+      [
+        "U1",
+        "J.620100.004.02*",
+        "Menggunakan Struktur Data",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U2",
+        "J.620100.009.01*",
+        "Menggunakan Spesifikasi Program",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U3",
+        "J.620100.010.01*",
+        "Menerapkan Perintah Eksekusi Bahasa Pemrograman Berbasis Teks, Grafik, dan Multimedia",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U4",
+        "J.620100.016.01",
+        "Menulis Kode dengan Prinsip Sesuai Guidelines dan Best Practices",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U5",
+        "J.620100.017.02",
+        "Mengimplementasikan Pemrograman Terstruktur",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U6",
+        "J.620100.023.02",
+        "Membuat Dokumen Kode Program",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U7",
+        "J.620100.025.02",
+        "Melakukan Debugging",
+        "Penguatan SKKNI/PKP"
+      ],
+      [
+        "U8",
+        "J.620100.033.02",
+        "Melaksanakan Pengujian Unit Program",
+        "Langsung pada MUK sekolah"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "*Catatan kode: terdapat variasi penulisan akhiran versi kode antara daftar unit, halaman rincian unit, PKP pengembangan, dan beberapa formulir sekolah. Kode bertanda bintang digunakan sebagai kode kerja pembelajaran berdasarkan daftar paket/referensi yang tersedia dan wajib dicocokkan kembali dengan dokumen skema LSP sebelum dicetak sebagai perangkat resmi."
+  },
+  {
+    "type": "p",
+    "text": "1.2 Keterlacakan Aktivitas dan Bukti"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Unit",
+        "Aktivitas proyek",
+        "Bukti utama"
+      ],
+      [
+        "U1",
+        "Menentukan kolom, tipe data, collection, dan operasi CRUD",
+        "Data dictionary, migration, model, demo CRUD"
+      ],
+      [
+        "U2",
+        "Menerjemahkan spesifikasi menjadi alur route-controller-model-view",
+        "Spesifikasi, IPO, navigasi, implementasi"
+      ],
+      [
+        "U3",
+        "Menjalankan Composer, Artisan, migration, route, test, dan server",
+        "Log terminal, route:list, aplikasi aktif"
+      ],
+      [
+        "U4",
+        "Menerapkan penamaan, MVC, validasi, pesan, dan kode yang mudah dirawat",
+        "Reviu source code dan demo"
+      ],
+      [
+        "U5",
+        "Menggunakan tipe data, kondisi, perulangan, method, parameter, return, dan array",
+        "Controller, Blade, model, CRUD"
+      ],
+      [
+        "U6",
+        "Membuat README, komentar seperlunya, dan laporan",
+        "README, screenshot, catatan fungsi"
+      ],
+      [
+        "U7",
+        "Mereproduksi, mencatat, menganalisis, dan memperbaiki bug",
+        "Log debugging sebelum/sesudah"
+      ],
+      [
+        "U8",
+        "Menyiapkan kebutuhan, skenario, data, pelaksanaan, dan evaluasi uji",
+        "Tabel TC-01 s.d. TC-10 dan php artisan test"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "1.3 Tujuan Pembelajaran"
+  },
+  {
+    "type": "p",
+    "text": "Menjelaskan kebutuhan, pengguna, input, proses, dan output aplikasi."
+  },
+  {
+    "type": "p",
+    "text": "Menyiapkan serta menjalankan proyek Laravel 12 pada PHP 8.2 dan MySQL."
+  },
+  {
+    "type": "p",
+    "text": "Membangun struktur MVC yang memisahkan route, controller, model, migration, dan view."
+  },
+  {
+    "type": "p",
+    "text": "Membuat landing page Kopi Ulee Kareng yang membaca produk dari database."
+  },
+  {
+    "type": "p",
+    "text": "Menerapkan Create, Read, Update, dan Delete pada satu entitas products."
+  },
+  {
+    "type": "p",
+    "text": "Menerapkan validasi, pesan kesalahan, notifikasi keberhasilan, percabangan, dan perulangan."
+  },
+  {
+    "type": "p",
+    "text": "Melaksanakan debugging terstruktur dan menjelaskan penyebab serta perbaikannya."
+  },
+  {
+    "type": "p",
+    "text": "Menyusun dan menjalankan pengujian manual serta feature test Laravel."
+  },
+  {
+    "type": "p",
+    "text": "Menyerahkan dokumentasi dan bukti kerja yang valid, autentik, terkini, dan memadai."
+  },
+  {
+    "type": "p",
+    "text": "1.4 Alokasi Waktu"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Tahap",
+        "Kegiatan",
+        "Mode belajar",
+        "Simulasi"
+      ],
+      [
+        "1",
+        "Orientasi, spesifikasi, dan perencanaan",
+        "35 menit",
+        "20 menit"
+      ],
+      [
+        "2",
+        "Pemeriksaan lingkungan dan database",
+        "40 menit",
+        "20 menit"
+      ],
+      [
+        "3",
+        "Migration, model, seeder, controller, route",
+        "80 menit",
+        "70 menit"
+      ],
+      [
+        "4",
+        "Landing page dan CRUD views",
+        "110 menit",
+        "80 menit"
+      ],
+      [
+        "5",
+        "Validasi, penyempurnaan, dan eksekusi",
+        "35 menit",
+        "30 menit"
+      ],
+      [
+        "6",
+        "Debugging terstruktur",
+        "25 menit",
+        "20 menit"
+      ],
+      [
+        "7",
+        "Pengujian dan dokumentasi",
+        "35 menit",
+        "20 menit"
+      ],
+      [
+        "8",
+        "PMO, presentasi, dan verifikasi bukti",
+        "30 menit",
+        "30 menit"
+      ],
+      [
+        "Total",
+        "Di luar waktu istirahat",
+        "390 menit",
+        "290 menit"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "PENYESUAIAN WAKTU\nUntuk latihan satu hari, guru dapat menyediakan starter project dan aset gambar. Untuk latihan mandiri dari nol, bagian instalasi dan pembuatan proyek sebaiknya dilakukan sebelum hari simulasi."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "2. Skenario dan Spesifikasi Proyek"
+  },
+  {
+    "type": "p",
+    "text": "2.1 Skenario Pekerjaan"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "STUDI KASUS\nAnda berperan sebagai Pemrogram Junior pada tim pengembang web. Pelaku usaha Kopi Ulee Kareng membutuhkan landing page untuk memperkenalkan identitas dan produk kopi. Daftar produk harus berasal dari database dan dikelola melalui halaman CRUD. Anda harus menyiapkan aplikasi, menulis kode, menjalankan, memperbaiki bug, menguji, dan membuat dokumentasi."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "2.2 Produk Akhir Minimum"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Komponen",
+        "Kriteria selesai"
+      ],
+      [
+        "Landing page",
+        "Navbar, hero, tentang, keunggulan, produk dinamis, kontak, dan footer."
+      ],
+      [
+        "CRUD produk",
+        "Daftar, tambah, simpan, edit, perbarui, dan hapus berfungsi."
+      ],
+      [
+        "Validasi",
+        "Nama dan deskripsi wajib; harga wajib integer minimal 0; gambar opsional."
+      ],
+      [
+        "Struktur",
+        "Route, controller, model, migration, seeder, dan Blade tersusun jelas."
+      ],
+      [
+        "Interaksi",
+        "Pesan validasi, notifikasi berhasil, dan konfirmasi hapus tersedia."
+      ],
+      [
+        "Debugging",
+        "Minimal satu bug direproduksi, dicatat, diperbaiki, dan diuji ulang."
+      ],
+      [
+        "Pengujian",
+        "Sepuluh skenario manual dan minimal satu feature test Laravel."
+      ],
+      [
+        "Dokumentasi",
+        "README, screenshot, catatan debugging, dan laporan hasil pengujian."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "2.3 Batasan Proyek"
+  },
+  {
+    "type": "p",
+    "text": "Hanya satu tabel inti, yaitu products."
+  },
+  {
+    "type": "p",
+    "text": "Tidak menggunakan autentikasi, role, pembayaran, keranjang, API, relasi banyak tabel, grafik, atau deployment."
+  },
+  {
+    "type": "p",
+    "text": "Gambar disimpan sebagai nama file yang telah tersedia pada public/images; fitur upload tidak diwajibkan."
+  },
+  {
+    "type": "p",
+    "text": "Tidak menggunakan Vite/NPM untuk CSS agar aplikasi dapat dikerjakan di laboratorium secara offline."
+  },
+  {
+    "type": "p",
+    "text": "Tampilan dinilai dari keterbacaan, konsistensi, dan fungsi, bukan kompleksitas desain."
+  },
+  {
+    "type": "p",
+    "text": "Aplikasi bukan toko daring; harga hanya informasi produk."
+  },
+  {
+    "type": "p",
+    "text": "2.4 Spesifikasi Fitur"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Area",
+        "Fitur wajib"
+      ],
+      [
+        "Publik",
+        "Beranda /; navigasi ke Tentang, Keunggulan, Produk, Kontak; produk membaca database."
+      ],
+      [
+        "Index CRUD",
+        "/produk; tabel produk; tombol tambah, edit, hapus, dan kembali."
+      ],
+      [
+        "Tambah",
+        "/produk/create; form dan pesan validasi."
+      ],
+      [
+        "Edit",
+        "/produk/{produk}/edit; data lama tampil dan dapat diperbarui."
+      ],
+      [
+        "Hapus",
+        "DELETE /produk/{produk}; konfirmasi sebelum penghapusan."
+      ],
+      [
+        "Umpan balik",
+        "Pesan berhasil setelah create/update/delete dan pesan kesalahan tiap field."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "2.5 Alur Kerja Aplikasi"
+  },
+  {
+    "type": "p",
+    "text": "ALUR REQUEST–RESPONSE"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Browser -> Route -> ProductController -> Product (Eloquent) -> MySQL\nMySQL -> Product -> ProductController -> Blade View -> Browser"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Asesi harus mampu menunjuk file yang berperan pada setiap tahap alur tersebut."
+  },
+  {
+    "type": "p",
+    "text": "2.6 Data Dictionary"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Kolom",
+        "Tipe Laravel/MySQL",
+        "Aturan",
+        "Keterangan"
+      ],
+      [
+        "id",
+        "id / BIGINT UNSIGNED",
+        "Primary key, auto",
+        "Nomor produk"
+      ],
+      [
+        "nama_produk",
+        "string(100) / VARCHAR",
+        "Wajib",
+        "Nama produk kopi"
+      ],
+      [
+        "deskripsi",
+        "text / TEXT",
+        "Wajib",
+        "Deskripsi singkat"
+      ],
+      [
+        "harga",
+        "unsignedInteger / INT UNSIGNED",
+        "Wajib, min 0",
+        "Rupiah tanpa tanda baca"
+      ],
+      [
+        "gambar",
+        "string / VARCHAR",
+        "Opsional, nullable",
+        "Nama file pada public/images"
+      ],
+      [
+        "created_at",
+        "timestamps",
+        "Otomatis",
+        "Waktu pembuatan"
+      ],
+      [
+        "updated_at",
+        "timestamps",
+        "Otomatis",
+        "Waktu perubahan"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "3. Persiapan Lingkungan Laravel 12"
+  },
+  {
+    "type": "p",
+    "text": "3.1 Standar Perangkat"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Komponen",
+        "Standar latihan"
+      ],
+      [
+        "Sistem operasi",
+        "Windows 10/11"
+      ],
+      [
+        "PHP",
+        "8.2.x"
+      ],
+      [
+        "Framework",
+        "Laravel 12.x"
+      ],
+      [
+        "Database",
+        "MySQL/MariaDB melalui Laragon atau XAMPP"
+      ],
+      [
+        "Dependency manager",
+        "Composer"
+      ],
+      [
+        "Editor",
+        "Visual Studio Code"
+      ],
+      [
+        "Browser",
+        "Chrome/Edge/Firefox"
+      ],
+      [
+        "Server lokal",
+        "php artisan serve; Apache tidak wajib untuk aplikasi"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "KONDISI AWAL YANG DIREKOMENDASIKAN\nPHP, Composer, Laravel starter project, MySQL, editor, dan aset gambar telah disiapkan oleh laboratorium. Siswa tetap wajib memeriksa versi, struktur folder, konfigurasi, serta cara menjalankannya."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "1",
+        "Menyalakan layanan laboratorium\nPastikan MySQL aktif dan terminal dapat digunakan.\nEstimasi: 5 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Laragon: buka Laragon lalu klik Start All. Gunakan Terminal Laragon agar PHP dan Composer dikenali."
+  },
+  {
+    "type": "p",
+    "text": "XAMPP: buka XAMPP Control Panel, jalankan MySQL. Jalankan Apache hanya jika memakai phpMyAdmin."
+  },
+  {
+    "type": "p",
+    "text": "Jangan menyalakan MySQL Laragon dan MySQL XAMPP bersamaan apabila keduanya menggunakan port 3306."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "2",
+        "Memeriksa versi dan direktori kerja\nBuktikan PHP, Composer, dan Artisan dapat dipanggil.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — PEMERIKSAAN AWAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php -v\ncomposer --version\ncd C:\\laragon\\www\n# Untuk XAMPP gunakan:\n# cd C:\\xampp\\htdocs"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Checkpoint: PHP menampilkan versi 8.2.x dan Composer menampilkan nomor versi tanpa pesan 'not recognized'."
+  },
+  {
+    "type": "p",
+    "text": "3.2 Jalur A — Menggunakan Starter Project"
+  },
+  {
+    "type": "p",
+    "text": "Gunakan jalur ini untuk latihan satu hari. Ekstrak atau salin folder starter project ke C:\\laragon\\www atau C:\\xampp\\htdocs, lalu buka terminal pada folder proyek."
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — STARTER PROJECT"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "cd C:\\laragon\\www\\kopi-ulee-kareng\ncomposer install\ncopy .env.example .env\nphp artisan key:generate\nphp artisan --version\nphp artisan about"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "JANGAN MENIMPA .ENV\nJika file .env sudah tersedia dan berisi konfigurasi laboratorium, jangan menjalankan copy .env.example .env. Lanjutkan ke pemeriksaan konfigurasi database."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "3.3 Jalur B — Membuat Proyek dari Nol"
+  },
+  {
+    "type": "p",
+    "text": "Jalur ini digunakan pada pembelajaran awal atau latihan mandiri sebelum simulasi."
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — MEMBUAT LARAVEL 12"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "cd C:\\laragon\\www\ncomposer create-project laravel/laravel kopi-ulee-kareng \"^12.0\"\ncd kopi-ulee-kareng\nphp artisan --version"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Hasil yang benar: terminal menampilkan Laravel Framework 12.x."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "3",
+        "Membuat database MySQL\nBuat database kosong bernama kopi_ulee_kareng.\nEstimasi: 5 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Laragon: Menu > MySQL > HeidiSQL > klik kanan koneksi > Create new > Database."
+  },
+  {
+    "type": "p",
+    "text": "XAMPP: buka http://localhost/phpmyadmin > New > isi nama database."
+  },
+  {
+    "type": "p",
+    "text": "ALTERNATIF TERMINAL MYSQL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "mysql -u root -e \"CREATE DATABASE kopi_ulee_kareng CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\"\n# Jika akun root memakai password:\n# mysql -u root -p"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "4",
+        "Mengatur file .env\nHubungkan Laravel ke database lokal.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — .env (bagian yang diperiksa)"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "APP_NAME=\"Kopi Ulee Kareng\"\nAPP_ENV=local\nAPP_KEY=\nAPP_DEBUG=true\nAPP_URL=http://127.0.0.1:8000\n\nDB_CONNECTION=mysql\nDB_HOST=127.0.0.1\nDB_PORT=3306\nDB_DATABASE=kopi_ulee_kareng\nDB_USERNAME=root\nDB_PASSWORD="
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — SEGARKAN KONFIGURASI"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan config:clear\nphp artisan cache:clear\nphp artisan about"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "KEAMANAN DASAR\nAPP_DEBUG=true hanya digunakan pada komputer latihan lokal. File .env tidak diserahkan ke publik dan tidak diunggah ke repositori terbuka."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "5",
+        "Menyiapkan folder tampilan dan aset\nBuat struktur folder yang akan digunakan.\nEstimasi: 5 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL WINDOWS"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "mkdir resources\\views\\layouts\nmkdir resources\\views\\produk\nmkdir public\\css\nmkdir public\\images"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Salin lima gambar latihan ke public/images: hero-kopi.jpg, kopi-original.jpg, kopi-sanger.jpg, kopi-tubruk.jpg, dan kopi-default.jpg."
+  },
+  {
+    "type": "p",
+    "text": "3.4 Checklist Kesiapan"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "No.",
+        "Pemeriksaan",
+        "Status",
+        "Bukti/catatan"
+      ],
+      [
+        "1",
+        "PHP 8.2 dapat dipanggil",
+        "☐",
+        ""
+      ],
+      [
+        "2",
+        "Composer dapat dipanggil",
+        "☐",
+        ""
+      ],
+      [
+        "3",
+        "Laravel Framework 12.x terdeteksi",
+        "☐",
+        ""
+      ],
+      [
+        "4",
+        "MySQL aktif",
+        "☐",
+        ""
+      ],
+      [
+        "5",
+        "Database kopi_ulee_kareng tersedia",
+        "☐",
+        ""
+      ],
+      [
+        "6",
+        ".env sesuai lingkungan",
+        "☐",
+        ""
+      ],
+      [
+        "7",
+        "Proyek terbuka di VS Code",
+        "☐",
+        ""
+      ],
+      [
+        "8",
+        "Folder views, css, dan images tersedia",
+        "☐",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "4. Analisis Kebutuhan dan Perancangan"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "6",
+        "Menganalisis kebutuhan\nTuliskan input, proses, dan output sebelum coding.\nEstimasi: 15 menit"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Komponen",
+        "Jawaban acuan proyek"
+      ],
+      [
+        "Tujuan",
+        "Mempromosikan Kopi Ulee Kareng dan menampilkan produk dari database."
+      ],
+      [
+        "Pengguna publik",
+        "Pengunjung landing page."
+      ],
+      [
+        "Pengelola",
+        "Petugas yang membuka halaman /produk."
+      ],
+      [
+        "Input",
+        "Nama produk, deskripsi, harga, dan nama file gambar opsional."
+      ],
+      [
+        "Proses",
+        "Validasi, simpan, baca, ubah, hapus, dan tampilkan."
+      ],
+      [
+        "Output",
+        "Landing page, tabel produk, form, pesan validasi, dan notifikasi."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "TUGAS PESERTA\nJelaskan kembali alur tambah produk dengan kalimat sendiri: form mengirim request, controller memvalidasi, model menyimpan ke database, kemudian aplikasi melakukan redirect dan menampilkan pesan."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "7",
+        "Merancang navigasi\nBedakan halaman publik dan halaman pengelolaan.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "RANCANGAN NAVIGASI"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "PUBLIK\n/ -> Beranda | Tentang | Keunggulan | Produk | Kontak\n\nPENGELOLAAN\n/produk -> /produk/create -> /produk/{produk}/edit -> hapus"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "8",
+        "Menyusun struktur file\nKetahui lokasi setiap komponen MVC.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "STRUKTUR TARGET"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "app/\n  Http/Controllers/ProductController.php\n  Models/Product.php\ndatabase/\n  migrations/xxxx_xx_xx_xxxxxx_create_products_table.php\n  seeders/ProductSeeder.php\npublic/\n  css/style.css\n  images/*.jpg\nresources/views/\n  layouts/app.blade.php\n  landing.blade.php\n  produk/index.blade.php\n  produk/create.blade.php\n  produk/edit.blade.php\n  produk/_form.blade.php\nroutes/web.php\ntests/Feature/ProductFlowTest.php\nREADME.md"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "4.1 Checkpoint Perencanaan"
+  },
+  {
+    "type": "p",
+    "text": "☐ Saya dapat menjelaskan tujuan, pengguna, input, proses, dan output."
+  },
+  {
+    "type": "p",
+    "text": "☐ Saya dapat menjelaskan alasan proyek cukup menggunakan satu tabel products."
+  },
+  {
+    "type": "p",
+    "text": "☐ Saya mengetahui hubungan route, controller, model, database, dan view."
+  },
+  {
+    "type": "p",
+    "text": "☐ Saya dapat menunjukkan folder tujuan setiap file yang akan dibuat."
+  },
+  {
+    "type": "p",
+    "text": "5. Membangun Struktur Backend Laravel"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "9",
+        "Membuat model dan migration\nBangkitkan dua file inti melalui Artisan.\nEstimasi: 5 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan make:model Product -m"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Perintah tersebut membuat app/Models/Product.php dan satu file migration baru pada database/migrations."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "10",
+        "Menulis migration products\nDefinisikan skema sesuai data dictionary.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — database/migrations/..._create_products_table.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('products', function (Blueprint $table) {\n            $table->id();\n            $table->string('nama_produk', 100);\n            $table->text('deskripsi');\n            $table->unsignedInteger('harga');\n            $table->string('gambar')->nullable();\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('products');\n    }\n};"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "JELASKAN\nMengapa harga menggunakan unsignedInteger? Karena harga latihan berupa bilangan bulat dan tidak boleh negatif. Mengapa gambar nullable? Karena nama file gambar tidak wajib diisi."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "11",
+        "Menulis model Product\nTetapkan atribut yang dapat diisi massal.\nEstimasi: 5 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — app/Models/Product.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Product extends Model\n{\n    use HasFactory;\n\n    protected $fillable = [\n        'nama_produk',\n        'deskripsi',\n        'harga',\n        'gambar',\n    ];\n\n    protected function casts(): array\n    {\n        return [\n            'harga' => 'integer',\n        ];\n    }\n}"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "12",
+        "Menjalankan migration\nBangun tabel dan periksa statusnya.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan migrate\nphp artisan migrate:status"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Checkpoint: migration create_products_table berstatus Ran dan tabel products terlihat pada phpMyAdmin/HeidiSQL."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "13",
+        "Membuat data awal dengan seeder\nSediakan data agar landing page langsung dapat diuji.\nEstimasi: 15 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan make:seeder ProductSeeder"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — database/seeders/ProductSeeder.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nnamespace Database\\Seeders;\n\nuse App\\Models\\Product;\nuse Illuminate\\Database\\Seeder;\n\nclass ProductSeeder extends Seeder\n{\n    public function run(): void\n    {\n        $products = [\n            [\n                'nama_produk' => 'Kopi Ulee Kareng Original',\n                'deskripsi' => 'Kopi khas Aceh dengan aroma kuat.',\n                'harga' => 25000,\n                'gambar' => 'kopi-original.jpg',\n            ],\n            [\n                'nama_produk' => 'Kopi Sanger',\n                'deskripsi' => 'Perpaduan kopi dan susu yang lembut.',\n                'harga' => 18000,\n                'gambar' => 'kopi-sanger.jpg',\n            ],\n            [\n                'nama_produk' => 'Kopi Tubruk Aceh',\n                'deskripsi' => 'Sajian tradisional dengan rasa pekat.',\n                'harga' => 15000,\n                'gambar' => 'kopi-tubruk.jpg',\n            ],\n        ];\n\n        foreach ($products as $product) {\n            Product::query()->create($product);\n        }\n    }\n}"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — database/seeders/DatabaseSeeder.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nnamespace Database\\Seeders;\n\nuse Illuminate\\Database\\Seeder;\n\nclass DatabaseSeeder extends Seeder\n{\n    public function run(): void\n    {\n        $this->call(ProductSeeder::class);\n    }\n}"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — JALANKAN SEEDER"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan db:seed"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "14",
+        "Membuat resource controller\nSiapkan method CRUD dan landing.\nEstimasi: 5 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan make:controller ProductController --resource --model=Product"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — app/Http/Controllers/ProductController.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\Product;\nuse Illuminate\\Http\\RedirectResponse;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\View\\View;\n\nclass ProductController extends Controller\n{\n    public function landing(): View\n    {\n        $products = Product::query()->latest()->get();\n\n        return view('landing', compact('products'));\n    }\n\n    public function index(): View\n    {\n        $products = Product::query()->latest()->get();\n\n        return view('produk.index', compact('products'));\n    }\n\n    public function create(): View\n    {\n        return view('produk.create');\n    }\n\n    public function store(Request $request): RedirectResponse\n    {\n        $validated = $request->validate(\n            [\n                'nama_produk' => ['required', 'string', 'max:100'],\n                'deskripsi' => ['required', 'string'],\n                'harga' => ['required', 'integer', 'min:0'],\n                'gambar' => ['nullable', 'string', 'max:255'],\n            ],\n            $this->validationMessages()\n        );\n\n        Product::query()->create($validated);\n\n        return redirect()\n            ->route('produk.index')\n            ->with('success', 'Produk berhasil ditambahkan.');\n    }\n\n    public function edit(Product $produk): View\n    {\n        return view('produk.edit', compact('produk'));\n    }\n\n    public function update(\n        Request $request,\n        Product $produk\n    ): RedirectResponse {\n        $validated = $request->validate(\n            [\n                'nama_produk' => ['required', 'string', 'max:100'],\n                'deskripsi' => ['required', 'string'],\n                'harga' => ['required', 'integer', 'min:0'],\n                'gambar' => ['nullable', 'string', 'max:255'],\n            ],\n            $this->validationMessages()\n        );\n\n        $produk->update($validated);\n\n        return redirect()\n            ->route('produk.index')\n            ->with('success', 'Produk berhasil diperbarui.');\n    }\n\n    public function destroy(Product $produk): RedirectResponse\n    {\n        $produk->delete();\n\n        return redirect()\n            ->route('produk.index')\n            ->with('success', 'Produk berhasil dihapus.');\n    }\n\n    private function validationMessages(): array\n    {\n        return [\n            'nama_produk.required' => 'Nama produk wajib diisi.',\n            'nama_produk.max' => 'Nama maksimal 100 karakter.',\n            'deskripsi.required' => 'Deskripsi wajib diisi.',\n            'harga.required' => 'Harga wajib diisi.',\n            'harga.integer' => 'Harga harus berupa bilangan bulat.',\n            'harga.min' => 'Harga tidak boleh negatif.',\n            'gambar.max' => 'Nama file gambar maksimal 255 karakter.',\n        ];\n    }\n}"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "BACA KODE\nPerhatikan method, parameter, return type, array aturan validasi, query Eloquent, redirect, dan pesan sesi. Bagian ini membuktikan penggunaan fungsi, array, input-output, kondisi validasi, serta akses penyimpanan."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "15",
+        "Membuat route\nHubungkan URL dengan method controller.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — routes/web.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nuse App\\Http\\Controllers\\ProductController;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', [ProductController::class, 'landing'])\n    ->name('landing');\n\nRoute::resource('produk', ProductController::class)\n    ->except(['show'])\n    ->parameters(['produk' => 'produk']);"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — VERIFIKASI ROUTE"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan route:list --name=produk\nphp artisan route:list --name=landing"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Checkpoint: route landing, produk.index, produk.create, produk.store, produk.edit, produk.update, dan produk.destroy terlihat."
+  },
+  {
+    "type": "p",
+    "text": "6. Membangun Antarmuka Landing Page dan CRUD"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "16",
+        "Membuat layout utama\nGunakan satu kerangka HTML untuk semua halaman.\nEstimasi: 15 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — resources/views/layouts/app.blade.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<!doctype html>\n<html lang=\"id\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"csrf-token\" content=\"{{ csrf_token() }}\">\n    <title>@yield('title', 'Kopi Ulee Kareng')</title>\n    <link rel=\"stylesheet\" href=\"{{ asset('css/style.css') }}\">\n</head>\n<body>\n    @yield('content')\n</body>\n</html>"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "17",
+        "Membuat landing page\nTampilkan identitas usaha dan produk dinamis.\nEstimasi: 30 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — resources/views/landing.blade.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "@extends('layouts.app')\n\n@section('title', 'Kopi Ulee Kareng')\n\n@section('content')\n<header class=\"navbar\">\n    <div class=\"container nav-inner\">\n        <a class=\"brand\" href=\"#beranda\">Kopi Ulee Kareng</a>\n        <nav>\n            <a href=\"#tentang\">Tentang</a>\n            <a href=\"#keunggulan\">Keunggulan</a>\n            <a href=\"#produk\">Produk</a>\n            <a href=\"#kontak\">Kontak</a>\n            <a class=\"btn btn-small\" href=\"{{ route('produk.index') }}\">\n                Kelola Produk\n            </a>\n        </nav>\n    </div>\n</header>\n\n<main>\n    <section id=\"beranda\" class=\"hero\">\n        <div class=\"container hero-grid\">\n            <div>\n                <span class=\"eyebrow\">Cita rasa khas Aceh</span>\n                <h1>Hangatnya budaya dalam secangkir kopi.</h1>\n                <p>\n                    Kenali Kopi Ulee Kareng melalui pilihan produk\n                    yang diracik untuk pecinta kopi Nusantara.\n                </p>\n                <a class=\"btn\" href=\"#produk\">Lihat Produk</a>\n            </div>\n            <div class=\"hero-card\">\n                <p>Aroma kuat</p>\n                <p>Rasa autentik</p>\n                <p>Warisan budaya Aceh</p>\n            </div>\n        </div>\n    </section>\n\n    <section id=\"tentang\" class=\"section\">\n        <div class=\"container narrow\">\n            <span class=\"eyebrow\">Tentang</span>\n            <h2>Kopi dari ruang temu masyarakat Aceh</h2>\n            <p>\n                Ulee Kareng dikenal sebagai salah satu kawasan kopi\n                di Banda Aceh. Landing page ini memperkenalkan produk\n                secara informatif dan sederhana.\n            </p>\n        </div>\n    </section>\n\n    <section id=\"keunggulan\" class=\"section section-soft\">\n        <div class=\"container\">\n            <span class=\"eyebrow\">Keunggulan</span>\n            <div class=\"features\">\n                <article><h3>Aroma</h3><p>Karakter wangi yang kuat.</p></article>\n                <article><h3>Rasa</h3><p>Cita rasa pekat dan khas.</p></article>\n                <article><h3>Budaya</h3><p>Bagian dari tradisi berkumpul.</p></article>\n            </div>\n        </div>\n    </section>\n\n    <section id=\"produk\" class=\"section\">\n        <div class=\"container\">\n            <span class=\"eyebrow\">Produk</span>\n            <h2>Pilihan Kopi Ulee Kareng</h2>\n            <div class=\"product-grid\">\n                @forelse ($products as $produk)\n                    <article class=\"product-card\">\n                        <img\n                            src=\"{{ asset('images/' . ($produk->gambar\n                                ?: 'kopi-default.jpg')) }}\"\n                            alt=\"{{ $produk->nama_produk }}\"\n                        >\n                        <div class=\"product-body\">\n                            <h3>{{ $produk->nama_produk }}</h3>\n                            <p>{{ $produk->deskripsi }}</p>\n                            <strong>\n                                Rp{{ number_format($produk->harga, 0, ',', '.') }}\n                            </strong>\n                        </div>\n                    </article>\n                @empty\n                    <div class=\"empty-state\">\n                        Belum ada produk. Silakan kelola data produk.\n                    </div>\n                @endforelse\n            </div>\n        </div>\n    </section>\n\n    <section id=\"kontak\" class=\"section contact\">\n        <div class=\"container\">\n            <span class=\"eyebrow\">Kontak</span>\n            <h2>Kunjungi Ulee Kareng, Banda Aceh</h2>\n            <p>Telepon: 08xx-xxxx-xxxx • Instagram: @kopiuleekareng</p>\n        </div>\n    </section>\n</main>\n\n<footer class=\"footer\">\n    <div class=\"container\">\n        <p>&copy; {{ date('Y') }} Kopi Ulee Kareng.</p>\n    </div>\n</footer>\n@endsection"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "KUK PEMROGRAMAN TERSTRUKTUR\n@forelse menerapkan perulangan sekaligus kondisi data kosong. number_format memproses keluaran harga. Variabel $products adalah collection yang diterima dari controller."
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "18",
+        "Membuat form partial\nHindari duplikasi field pada halaman tambah dan edit.\nEstimasi: 20 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — resources/views/produk/_form.blade.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<div class=\"form-group\">\n    <label for=\"nama_produk\">Nama produk</label>\n    <input\n        id=\"nama_produk\"\n        name=\"nama_produk\"\n        type=\"text\"\n        value=\"{{ old('nama_produk', $produk->nama_produk ?? '') }}\"\n        class=\"form-control @error('nama_produk') is-invalid @enderror\"\n    >\n    @error('nama_produk')\n        <small class=\"error\">{{ $message }}</small>\n    @enderror\n</div>\n\n<div class=\"form-group\">\n    <label for=\"deskripsi\">Deskripsi</label>\n    <textarea\n        id=\"deskripsi\"\n        name=\"deskripsi\"\n        rows=\"5\"\n        class=\"form-control @error('deskripsi') is-invalid @enderror\"\n    >{{ old('deskripsi', $produk->deskripsi ?? '') }}</textarea>\n    @error('deskripsi')\n        <small class=\"error\">{{ $message }}</small>\n    @enderror\n</div>\n\n<div class=\"form-group\">\n    <label for=\"harga\">Harga</label>\n    <input\n        id=\"harga\"\n        name=\"harga\"\n        type=\"number\"\n        min=\"0\"\n        value=\"{{ old('harga', $produk->harga ?? '') }}\"\n        class=\"form-control @error('harga') is-invalid @enderror\"\n    >\n    @error('harga')\n        <small class=\"error\">{{ $message }}</small>\n    @enderror\n</div>\n\n<div class=\"form-group\">\n    <label for=\"gambar\">Nama file gambar (opsional)</label>\n    <input\n        id=\"gambar\"\n        name=\"gambar\"\n        type=\"text\"\n        placeholder=\"contoh: kopi-original.jpg\"\n        value=\"{{ old('gambar', $produk->gambar ?? '') }}\"\n        class=\"form-control @error('gambar') is-invalid @enderror\"\n    >\n    @error('gambar')\n        <small class=\"error\">{{ $message }}</small>\n    @enderror\n</div>\n\n<div class=\"form-actions\">\n    <button class=\"btn\" type=\"submit\">{{ $tombol }}</button>\n    <a class=\"btn btn-secondary\" href=\"{{ route('produk.index') }}\">\n        Batal\n    </a>\n</div>"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "19",
+        "Membuat halaman tambah\nGunakan CSRF dan form partial.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — resources/views/produk/create.blade.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "@extends('layouts.app')\n\n@section('title', 'Tambah Produk')\n\n@section('content')\n<main class=\"admin-page\">\n    <div class=\"container admin-container\">\n        <div class=\"page-heading\">\n            <div>\n                <span class=\"eyebrow\">Pengelolaan produk</span>\n                <h1>Tambah Produk</h1>\n            </div>\n        </div>\n\n        <form method=\"POST\" action=\"{{ route('produk.store') }}\"\n              class=\"form-card\">\n            @csrf\n            @include('produk._form', ['tombol' => 'Simpan Produk'])\n        </form>\n    </div>\n</main>\n@endsection"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "20",
+        "Membuat halaman edit\nGunakan method spoofing PUT.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — resources/views/produk/edit.blade.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "@extends('layouts.app')\n\n@section('title', 'Edit Produk')\n\n@section('content')\n<main class=\"admin-page\">\n    <div class=\"container admin-container\">\n        <div class=\"page-heading\">\n            <div>\n                <span class=\"eyebrow\">Pengelolaan produk</span>\n                <h1>Edit Produk</h1>\n            </div>\n        </div>\n\n        <form method=\"POST\"\n              action=\"{{ route('produk.update', $produk) }}\"\n              class=\"form-card\">\n            @csrf\n            @method('PUT')\n            @include('produk._form', ['tombol' => 'Perbarui Produk'])\n        </form>\n    </div>\n</main>\n@endsection"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "21",
+        "Membuat halaman index CRUD\nTampilkan data dan seluruh tombol aksi.\nEstimasi: 25 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — resources/views/produk/index.blade.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "@extends('layouts.app')\n\n@section('title', 'Kelola Produk')\n\n@section('content')\n<main class=\"admin-page\">\n    <div class=\"container admin-container wide\">\n        <div class=\"page-heading\">\n            <div>\n                <span class=\"eyebrow\">Dashboard sederhana</span>\n                <h1>Kelola Produk</h1>\n            </div>\n            <div class=\"heading-actions\">\n                <a class=\"btn btn-secondary\" href=\"{{ route('landing') }}\">\n                    Lihat Landing Page\n                </a>\n                <a class=\"btn\" href=\"{{ route('produk.create') }}\">\n                    Tambah Produk\n                </a>\n            </div>\n        </div>\n\n        @if (session('success'))\n            <div class=\"alert-success\">{{ session('success') }}</div>\n        @endif\n\n        <div class=\"table-card\">\n            <table>\n                <thead>\n                    <tr>\n                        <th>No.</th>\n                        <th>Nama</th>\n                        <th>Harga</th>\n                        <th>Gambar</th>\n                        <th>Aksi</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    @forelse ($products as $produk)\n                        <tr>\n                            <td>{{ $loop->iteration }}</td>\n                            <td>\n                                <strong>{{ $produk->nama_produk }}</strong>\n                                <small>{{ $produk->deskripsi }}</small>\n                            </td>\n                            <td>\n                                Rp{{ number_format($produk->harga, 0, ',', '.') }}\n                            </td>\n                            <td>{{ $produk->gambar ?: 'kopi-default.jpg' }}</td>\n                            <td class=\"actions\">\n                                <a class=\"btn btn-small btn-edit\"\n                                   href=\"{{ route('produk.edit', $produk) }}\">\n                                    Edit\n                                </a>\n                                <form method=\"POST\"\n                                      action=\"{{ route('produk.destroy', $produk) }}\"\n                                      onsubmit=\"return confirm('Hapus produk ini?')\">\n                                    @csrf\n                                    @method('DELETE')\n                                    <button class=\"btn btn-small btn-danger\"\n                                            type=\"submit\">\n                                        Hapus\n                                    </button>\n                                </form>\n                            </td>\n                        </tr>\n                    @empty\n                        <tr>\n                            <td colspan=\"5\" class=\"empty-state\">\n                                Belum ada produk.\n                            </td>\n                        </tr>\n                    @endforelse\n                </tbody>\n            </table>\n        </div>\n    </div>\n</main>\n@endsection"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "22",
+        "Menambahkan CSS\nBuat tampilan responsif tanpa ketergantungan internet.\nEstimasi: 30 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — public/css/style.css"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        ":root {\n    --coffee: #4a2c20;\n    --coffee-dark: #2f1b14;\n    --gold: #c58b3a;\n    --cream: #f7f1e8;\n    --soft: #fbf8f3;\n    --ink: #202020;\n    --muted: #6b6b6b;\n    --white: #ffffff;\n    --danger: #a33a3a;\n    --success: #2d6a4f;\n    --border: #e5ded5;\n}\n\n* { box-sizing: border-box; }\nhtml { scroll-behavior: smooth; }\nbody {\n    margin: 0;\n    color: var(--ink);\n    background: var(--white);\n    font-family: Arial, Helvetica, sans-serif;\n    line-height: 1.6;\n}\na { color: inherit; text-decoration: none; }\nimg { display: block; width: 100%; }\n.container { width: min(1120px, 90%); margin: 0 auto; }\n.narrow { max-width: 760px; }\n\n.navbar {\n    position: sticky;\n    top: 0;\n    z-index: 20;\n    background: rgba(255, 255, 255, .96);\n    border-bottom: 1px solid var(--border);\n}\n.nav-inner {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    min-height: 72px;\n    gap: 24px;\n}\n.brand { color: var(--coffee-dark); font-weight: 800; }\nnav { display: flex; align-items: center; gap: 20px; }\nnav a:hover { color: var(--gold); }\n\n.hero {\n    padding: 96px 0;\n    background: linear-gradient(135deg, var(--cream), #fff 60%);\n}\n.hero-grid {\n    display: grid;\n    grid-template-columns: 1.5fr .8fr;\n    gap: 64px;\n    align-items: center;\n}\nh1, h2, h3 { color: var(--coffee-dark); line-height: 1.15; }\nh1 { margin: 12px 0 20px; font-size: clamp(2.4rem, 6vw, 4.8rem); }\nh2 { margin: 10px 0 24px; font-size: clamp(1.9rem, 4vw, 3rem); }\nh3 { margin: 0 0 10px; }\n.eyebrow {\n    color: var(--gold);\n    font-size: .78rem;\n    font-weight: 800;\n    letter-spacing: .14em;\n    text-transform: uppercase;\n}\n.hero-card {\n    padding: 28px;\n    color: var(--white);\n    background: var(--coffee);\n    border-radius: 24px;\n    box-shadow: 0 20px 50px rgba(47, 27, 20, .18);\n}\n.hero-card p { padding: 12px 0; border-bottom: 1px solid #ffffff33; }\n\n.section { padding: 80px 0; }\n.section-soft { background: var(--soft); }\n.features, .product-grid {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 24px;\n}\n.features article, .product-card {\n    background: var(--white);\n    border: 1px solid var(--border);\n    border-radius: 18px;\n    overflow: hidden;\n    box-shadow: 0 10px 30px rgba(47, 27, 20, .06);\n}\n.features article { padding: 26px; }\n.product-card img { height: 210px; object-fit: cover; background: var(--cream); }\n.product-body { padding: 22px; }\n.product-body strong { color: var(--coffee); font-size: 1.1rem; }\n.contact { color: var(--white); background: var(--coffee-dark); }\n.contact h2 { color: var(--white); }\n.footer { padding: 24px 0; color: #eaded5; background: #21120d; }\n\n.btn {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n    padding: 11px 18px;\n    color: var(--white);\n    background: var(--coffee);\n    border: 0;\n    border-radius: 10px;\n    cursor: pointer;\n    font: inherit;\n    font-weight: 700;\n}\n.btn:hover { background: var(--coffee-dark); }\n.btn-small { padding: 8px 12px; font-size: .86rem; }\n.btn-secondary { color: var(--coffee); background: var(--cream); }\n.btn-edit { background: #8a6426; }\n.btn-danger { background: var(--danger); }\n\n.admin-page { min-height: 100vh; padding: 56px 0; background: var(--soft); }\n.admin-container { max-width: 760px; }\n.admin-container.wide { max-width: 1120px; }\n.page-heading {\n    display: flex;\n    justify-content: space-between;\n    align-items: end;\n    gap: 20px;\n    margin-bottom: 24px;\n}\n.page-heading h1 { margin: 6px 0 0; font-size: 2.4rem; }\n.heading-actions { display: flex; gap: 10px; flex-wrap: wrap; }\n.form-card, .table-card {\n    padding: 26px;\n    background: var(--white);\n    border: 1px solid var(--border);\n    border-radius: 16px;\n    box-shadow: 0 12px 32px rgba(47, 27, 20, .06);\n}\n.form-group { margin-bottom: 18px; }\n.form-group label { display: block; margin-bottom: 6px; font-weight: 700; }\n.form-control {\n    width: 100%;\n    padding: 11px 12px;\n    border: 1px solid #cfc6bc;\n    border-radius: 9px;\n    font: inherit;\n}\n.form-control:focus { outline: 2px solid #c58b3a55; border-color: var(--gold); }\n.is-invalid { border-color: var(--danger); }\n.error { display: block; margin-top: 5px; color: var(--danger); }\n.form-actions { display: flex; gap: 10px; margin-top: 24px; }\n.alert-success {\n    margin-bottom: 18px;\n    padding: 12px 16px;\n    color: var(--success);\n    background: #eaf4ed;\n    border: 1px solid #bddbc8;\n    border-radius: 10px;\n}\ntable { width: 100%; border-collapse: collapse; }\nth, td { padding: 13px 12px; border-bottom: 1px solid var(--border); text-align: left; }\nth { color: var(--white); background: var(--coffee); }\ntd small { display: block; color: var(--muted); }\n.actions { display: flex; gap: 8px; align-items: center; }\n.empty-state {\n    grid-column: 1 / -1;\n    padding: 28px;\n    text-align: center;\n    color: var(--muted);\n    background: var(--cream);\n    border-radius: 14px;\n}\n\n@media (max-width: 800px) {\n    .nav-inner, nav, .page-heading { align-items: flex-start; }\n    .nav-inner, .page-heading { flex-direction: column; padding: 16px 0; }\n    nav { flex-wrap: wrap; gap: 12px; }\n    .hero-grid, .features, .product-grid { grid-template-columns: 1fr; }\n    .hero { padding: 64px 0; }\n    .section { padding: 56px 0; }\n    .table-card { overflow-x: auto; }\n}"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "23",
+        "Menjalankan aplikasi\nEksekusi server dan buka seluruh halaman.\nEstimasi: 10 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan optimize:clear\nphp artisan route:list\nphp artisan serve"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Buka http://127.0.0.1:8000 dan http://127.0.0.1:8000/produk. Hentikan server dengan Ctrl+C setelah praktik."
+  },
+  {
+    "type": "p",
+    "text": "6.1 Checklist Fungsi CRUD"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "No.",
+        "Pemeriksaan",
+        "Ya",
+        "Belum",
+        "Bukti"
+      ],
+      [
+        "1",
+        "Landing page tampil tanpa error kritis",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "2",
+        "Produk dari database tampil pada landing",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "3",
+        "Halaman index /produk tampil",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "4",
+        "Tambah produk valid berhasil",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "5",
+        "Data tidak valid ditolak",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "6",
+        "Edit/perbarui produk berhasil",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "7",
+        "Hapus dengan konfirmasi berhasil",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "8",
+        "Pesan berhasil dan error terlihat",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "9",
+        "Tampilan tetap terbaca pada layar kecil",
+        "☐",
+        "☐",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "7. Debugging dan Pengujian Unit Program"
+  },
+  {
+    "type": "p",
+    "text": "7.1 Prosedur Debugging Terstruktur"
+  },
+  {
+    "type": "p",
+    "text": "1. Reproduksi error dengan langkah yang sama."
+  },
+  {
+    "type": "p",
+    "text": "2. Baca pesan error pada browser dan terminal."
+  },
+  {
+    "type": "p",
+    "text": "3. Catat jenis error, file, baris, route, dan data yang digunakan."
+  },
+  {
+    "type": "p",
+    "text": "4. Rumuskan dugaan penyebab sebelum mengubah kode."
+  },
+  {
+    "type": "p",
+    "text": "5. Ubah bagian terkecil yang relevan; jangan mengganti banyak file sekaligus."
+  },
+  {
+    "type": "p",
+    "text": "6. Jalankan ulang fitur yang gagal dan fitur terkait."
+  },
+  {
+    "type": "p",
+    "text": "7. Catat bukti sebelum dan sesudah perbaikan."
+  },
+  {
+    "type": "p",
+    "text": "7.2 Latihan Bug untuk DIT"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Kode",
+        "Bug yang disisipkan guru",
+        "Gejala",
+        "Target analisis"
+      ],
+      [
+        "BUG-A",
+        "View memakai $product, controller mengirim $products",
+        "Undefined variable/data kosong",
+        "Samakan nama variabel"
+      ],
+      [
+        "BUG-B",
+        "Route form product.store, seharusnya produk.store",
+        "Route not defined",
+        "Cek route:list dan nama route"
+      ],
+      [
+        "BUG-C",
+        "fillable pada model dikosongkan",
+        "Mass assignment/data gagal",
+        "Cek atribut yang boleh diisi"
+      ],
+      [
+        "BUG-D",
+        "Migration memakai nama, controller memakai nama_produk",
+        "Unknown column/data tidak sesuai",
+        "Samakan skema-input-validasi"
+      ],
+      [
+        "BUG-E",
+        "@foreach tidak ditutup",
+        "Blade gagal dikompilasi",
+        "Lengkapi directive"
+      ],
+      [
+        "BUG-F",
+        "Validasi harga tidak memakai integer|min:0",
+        "Harga huruf/negatif lolos",
+        "Perbaiki rules dan uji ulang"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "ATURAN SIMULASI\nGuru memilih satu bug. Peserta tidak diberi kunci perbaikan. Peserta harus menunjukkan pesan error, dugaan penyebab, perubahan, serta bukti hasil uji ulang."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "7.3 Kebutuhan dan Standar Pengujian"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Elemen U8",
+        "Implementasi pada jobsheet"
+      ],
+      [
+        "1. Menentukan kebutuhan uji",
+        "Tetapkan spesifikasi, browser, Laravel test, kondisi lulus/gagal."
+      ],
+      [
+        "2. Dokumentasi uji",
+        "Buat skenario normal, batas, dan data tidak valid."
+      ],
+      [
+        "3. Data uji",
+        "Siapkan data produk valid, kosong, huruf, negatif, dan perubahan."
+      ],
+      [
+        "4. Pelaksanaan",
+        "Jalankan test case dan feature test sesuai urutan."
+      ],
+      [
+        "5. Evaluasi",
+        "Catat hasil aktual, analisis kegagalan, perbaiki, dan uji ulang."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "7.4 Skenario Pengujian Manual"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "ID",
+        "Langkah",
+        "Data uji",
+        "Hasil yang diharapkan"
+      ],
+      [
+        "TC-01",
+        "Buka /",
+        "Tanpa data khusus",
+        "Status 200; bagian utama tampil"
+      ],
+      [
+        "TC-02",
+        "Buka /produk saat kosong",
+        "Tabel products kosong",
+        "Pesan belum ada produk tampil"
+      ],
+      [
+        "TC-03",
+        "Tambah produk valid",
+        "Kopi Aceh; deskripsi; 22000",
+        "Tersimpan dan pesan berhasil"
+      ],
+      [
+        "TC-04",
+        "Tambah tanpa nama",
+        "Nama kosong",
+        "Validasi muncul; tidak tersimpan"
+      ],
+      [
+        "TC-05",
+        "Harga berupa huruf",
+        "dua puluh ribu",
+        "Validasi integer muncul"
+      ],
+      [
+        "TC-06",
+        "Harga negatif",
+        "-1000",
+        "Validasi minimal 0 muncul"
+      ],
+      [
+        "TC-07",
+        "Edit produk",
+        "Harga baru 24000",
+        "Perubahan tersimpan"
+      ],
+      [
+        "TC-08",
+        "Hapus produk",
+        "Satu produk dipilih",
+        "Terhapus setelah konfirmasi"
+      ],
+      [
+        "TC-09",
+        "Gambar dikosongkan",
+        "gambar null",
+        "Fallback kopi-default.jpg digunakan"
+      ],
+      [
+        "TC-10",
+        "Periksa landing setelah CRUD",
+        "Data terbaru",
+        "Landing menampilkan data terbaru"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "24",
+        "Membuat feature test\nUji landing dan proses penyimpanan melalui HTTP test.\nEstimasi: 20 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan make:test ProductFlowTest"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — tests/Feature/ProductFlowTest.php"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "<?php\n\nnamespace Tests\\Feature;\n\nuse App\\Models\\Product;\nuse Illuminate\\Foundation\\Testing\\RefreshDatabase;\nuse Tests\\TestCase;\n\nclass ProductFlowTest extends TestCase\n{\n    use RefreshDatabase;\n\n    public function test_landing_page_dapat_diakses(): void\n    {\n        $response = $this->get(route('landing'));\n\n        $response->assertOk();\n        $response->assertSee('Kopi Ulee Kareng');\n    }\n\n    public function test_produk_valid_dapat_disimpan(): void\n    {\n        $response = $this->post(route('produk.store'), [\n            'nama_produk' => 'Kopi Test',\n            'deskripsi' => 'Produk untuk pengujian.',\n            'harga' => 20000,\n            'gambar' => null,\n        ]);\n\n        $response->assertRedirect(route('produk.index'));\n\n        $this->assertDatabaseHas('products', [\n            'nama_produk' => 'Kopi Test',\n            'harga' => 20000,\n        ]);\n    }\n\n    public function test_harga_harus_bilangan_bulat(): void\n    {\n        $response = $this->post(route('produk.store'), [\n            'nama_produk' => 'Kopi Tidak Valid',\n            'deskripsi' => 'Data uji tidak valid.',\n            'harga' => 'dua puluh ribu',\n        ]);\n\n        $response->assertSessionHasErrors(['harga']);\n        $this->assertDatabaseCount('products', 0);\n    }\n}"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "TERMINAL — MENJALANKAN TEST"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "php artisan test\n# Menjalankan satu file saja:\nphp artisan test tests/Feature/ProductFlowTest.php"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "HASIL LULUS\nTerminal menampilkan PASS untuk seluruh test. Jika ada FAIL, baca nama test, pesan kegagalan, expected/actual, dan stack trace; kemudian catat pada lembar pengujian."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "7.5 Lembar Hasil Pengujian"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "ID",
+        "Hasil aktual",
+        "Status",
+        "Bukti",
+        "Tindak lanjut"
+      ],
+      [
+        "TC-01",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-02",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-03",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-04",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-05",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-06",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-07",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-08",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-09",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ],
+      [
+        "TC-10",
+        "",
+        "Lulus / Gagal",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "7.6 Catatan Debugging"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Komponen",
+        "Catatan peserta"
+      ],
+      [
+        "Tanggal/waktu",
+        ""
+      ],
+      [
+        "Fitur/langkah",
+        ""
+      ],
+      [
+        "Pesan error",
+        ""
+      ],
+      [
+        "File dan baris",
+        ""
+      ],
+      [
+        "Dugaan penyebab",
+        ""
+      ],
+      [
+        "Perbaikan",
+        ""
+      ],
+      [
+        "Hasil uji ulang",
+        "Berhasil / Belum"
+      ],
+      [
+        "Bukti",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "8. Dokumentasi, Portofolio, dan Presentasi"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "25",
+        "Membuat README\nJelaskan cara menjalankan dan struktur aplikasi.\nEstimasi: 20 menit"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "FILE — README.md"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "# Kopi Ulee Kareng\n\nLanding page dan CRUD produk menggunakan Laravel 12.\n\n## Teknologi\n- PHP 8.2\n- Laravel 12\n- MySQL\n- Blade dan CSS\n\n## Cara Menjalankan\n1. Jalankan `composer install`.\n2. Salin `.env.example` menjadi `.env` jika diperlukan.\n3. Atur koneksi database pada `.env`.\n4. Jalankan `php artisan key:generate`.\n5. Jalankan `php artisan migrate --seed`.\n6. Jalankan `php artisan serve`.\n7. Buka `http://127.0.0.1:8000`.\n\n## Fitur\n- Landing page produk Kopi Ulee Kareng\n- Daftar produk\n- Tambah, edit, dan hapus produk\n- Validasi dan notifikasi\n- Pengujian manual dan feature test\n\n## Struktur Utama\n- `app/Models/Product.php`\n- `app/Http/Controllers/ProductController.php`\n- `routes/web.php`\n- `resources/views/`\n- `tests/Feature/ProductFlowTest.php`\n\n## Pengujian\nJalankan `php artisan test`.\n\n## Penyusun\nNama peserta: ...\nKelas: ...\nTanggal: ..."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "8.1 Struktur Folder Pengumpulan"
+  },
+  {
+    "type": "p",
+    "text": "FOLDER PORTOFOLIO"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "NAMA_KELAS_SERKOM_KOPI/\n  01_Source_Code/kopi-ulee-kareng/\n  02_Spesifikasi/Spesifikasi_Kopi_Ulee_Kareng.docx\n  03_Screenshot/\n      01_landing.png\n      02_index_produk.png\n      03_form_tambah.png\n      04_validasi.png\n      05_edit.png\n      06_test_pass.png\n  04_Debugging/Catatan_Debugging.docx\n  05_Testing/Laporan_Pengujian.docx\n  README.md"
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "DATA YANG TIDAK DIKUMPULKAN\nHapus isi sensitif pada .env sebelum portofolio dibagikan. Folder vendor boleh tidak disertakan apabila pengumpulan dilakukan melalui arsip dan batas ukuran ditentukan guru; tuliskan composer install pada README."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "8.2 Checklist Bukti"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "No.",
+        "Bukti",
+        "Status",
+        "Ada",
+        "Catatan"
+      ],
+      [
+        "1",
+        "Dokumen spesifikasi/IPO",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "2",
+        "Source code Laravel",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "3",
+        "Migration dan model",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "4",
+        "Controller dan route",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "5",
+        "Landing dan CRUD views",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "6",
+        "CSS dan aset",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "7",
+        "README",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "8",
+        "Screenshot aplikasi",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "9",
+        "Catatan debugging",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "10",
+        "Tabel hasil pengujian",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "11",
+        "Output php artisan test",
+        "Wajib",
+        "☐",
+        ""
+      ],
+      [
+        "12",
+        "Video demo singkat",
+        "Opsional",
+        "☐",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "8.3 Panduan Presentasi 5 Menit"
+  },
+  {
+    "type": "p",
+    "text": "1. Jelaskan kebutuhan pengguna dan batasan aplikasi."
+  },
+  {
+    "type": "p",
+    "text": "2. Tunjukkan alur route-controller-model-database-view."
+  },
+  {
+    "type": "p",
+    "text": "3. Demonstrasikan create, read, update, dan delete."
+  },
+  {
+    "type": "p",
+    "text": "4. Tunjukkan validasi data tidak valid."
+  },
+  {
+    "type": "p",
+    "text": "5. Jelaskan satu bug, penyebab, dan perbaikannya."
+  },
+  {
+    "type": "p",
+    "text": "6. Tunjukkan tabel pengujian dan hasil php artisan test."
+  },
+  {
+    "type": "p",
+    "text": "7. Tutup dengan penjelasan bukti yang dikumpulkan."
+  },
+  {
+    "type": "p",
+    "text": "8.4 Log Pengerjaan"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "No.",
+        "Aktivitas",
+        "Mulai",
+        "Selesai",
+        "Bukti/catatan"
+      ],
+      [
+        "1",
+        "Pemeriksaan lingkungan",
+        "",
+        "",
+        ""
+      ],
+      [
+        "2",
+        "Database dan .env",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3",
+        "Migration + model",
+        "",
+        "",
+        ""
+      ],
+      [
+        "4",
+        "Seeder",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5",
+        "Controller + route",
+        "",
+        "",
+        ""
+      ],
+      [
+        "6",
+        "Landing page",
+        "",
+        "",
+        ""
+      ],
+      [
+        "7",
+        "CRUD views",
+        "",
+        "",
+        ""
+      ],
+      [
+        "8",
+        "Validasi + notifikasi",
+        "",
+        "",
+        ""
+      ],
+      [
+        "9",
+        "Debugging",
+        "",
+        "",
+        ""
+      ],
+      [
+        "10",
+        "Testing + dokumentasi",
+        "",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "9. Penilaian Pembelajaran dan Kesiapan Serkom"
+  },
+  {
+    "type": "p",
+    "text": "9.1 Rubrik Formatif"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Komponen",
+        "Bobot",
+        "Indikator utama"
+      ],
+      [
+        "Analisis dan spesifikasi",
+        "10",
+        "IPO, data dictionary, navigasi, penjelasan tepat"
+      ],
+      [
+        "Lingkungan dan eksekusi",
+        "10",
+        "Versi, .env, migration, route, server dipahami"
+      ],
+      [
+        "Database, model, seeder",
+        "15",
+        "Skema tepat, fillable/casts benar, data tersedia"
+      ],
+      [
+        "Controller dan route",
+        "15",
+        "Method, validasi, binding, redirect berfungsi"
+      ],
+      [
+        "Landing page",
+        "10",
+        "Bagian wajib dan produk dinamis tampil"
+      ],
+      [
+        "CRUD dan interaksi",
+        "15",
+        "Create/read/update/delete, error, notifikasi berfungsi"
+      ],
+      [
+        "Debugging",
+        "10",
+        "Error dicatat, dianalisis, diperbaiki, diuji ulang"
+      ],
+      [
+        "Pengujian",
+        "10",
+        "Test case lengkap dan feature test lulus"
+      ],
+      [
+        "Dokumentasi/presentasi",
+        "5",
+        "README, bukti, dan penjelasan autentik"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Nilai formatif membantu pembelajaran, tetapi tidak menggantikan keputusan K/BK pada asesmen kompetensi."
+  },
+  {
+    "type": "p",
+    "text": "9.2 Keputusan Kesiapan U8 — J.620100.033.02"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "KUK",
+        "Indikator pada latihan",
+        "K",
+        "BK",
+        "Bukti/catatan"
+      ],
+      [
+        "1.1",
+        "Prosedur uji sesuai tahap pengembangan diidentifikasi",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "1.2",
+        "Tools uji ditentukan",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "1.3",
+        "Standar dan kondisi uji diidentifikasi",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "2.1",
+        "Kebutuhan uji ditentukan",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "2.2",
+        "Variasi kondisi uji dilaksanakan",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "2.3",
+        "Skenario uji dibuat",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "3.1",
+        "Data uji diidentifikasi",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "3.2",
+        "Data uji dibangkitkan",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "4.1",
+        "Skenario uji didesain",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "4.2",
+        "Prosedur uji dalam algoritma didesain",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "4.3",
+        "Uji coba dilaksanakan",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "5.1",
+        "Hasil uji dicatat",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "5.2",
+        "Hasil uji dianalisis",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "5.3",
+        "Prosedur uji dilaporkan",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "5.4",
+        "Kesalahan/error diselesaikan",
+        "☐",
+        "☐",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "ATURAN KESIAPAN\nPeserta dinyatakan siap mengikuti simulasi U8 apabila seluruh KUK teramati, bukti tersedia, feature test dan pengujian manual dapat dijelaskan, serta aspek kritis 'melaksanakan uji unit program' tercapai."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "9.3 Rekap Kesiapan Unit Penguatan"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Unit",
+        "Memadai",
+        "Belum",
+        "Bukti yang perlu diperbaiki"
+      ],
+      [
+        "U1",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U2",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U3",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U4",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U5",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U6",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U7",
+        "☐",
+        "☐",
+        ""
+      ],
+      [
+        "U8",
+        "☐",
+        "☐",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "9.4 Rekomendasi"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Pernyataan",
+        "Pilihan/catatan"
+      ],
+      [
+        "Keputusan pembelajaran",
+        "☐ Siap simulasi  ☐ Perlu latihan tambahan"
+      ],
+      [
+        "Unit/KUK yang perlu diperkuat",
+        ""
+      ],
+      [
+        "Bukti tambahan",
+        ""
+      ],
+      [
+        "Tindak lanjut",
+        ""
+      ],
+      [
+        "Nama guru/asesor",
+        ""
+      ],
+      [
+        "Tanggal dan paraf",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Lampiran A — Troubleshooting Cepat"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Gejala",
+        "Kemungkinan penyebab",
+        "Tindakan awal"
+      ],
+      [
+        "php tidak dikenali",
+        "PATH/terminal tidak tepat",
+        "Gunakan Terminal Laragon atau atur PATH PHP XAMPP."
+      ],
+      [
+        "composer tidak dikenali",
+        "Composer belum terpasang/PATH",
+        "Pasang Composer dan buka ulang terminal."
+      ],
+      [
+        "No application encryption key",
+        "APP_KEY kosong",
+        "Jalankan php artisan key:generate."
+      ],
+      [
+        "Unknown database",
+        "Database belum dibuat/nama salah",
+        "Buat database dan samakan DB_DATABASE."
+      ],
+      [
+        "Access denied for user",
+        "Username/password salah",
+        "Periksa DB_USERNAME dan DB_PASSWORD."
+      ],
+      [
+        "Connection refused",
+        "MySQL mati/port salah",
+        "Jalankan MySQL dan periksa DB_PORT."
+      ],
+      [
+        "Base table not found",
+        "Migration belum berjalan",
+        "Jalankan php artisan migrate."
+      ],
+      [
+        "Route not defined",
+        "Nama route salah",
+        "Jalankan route:list dan samakan route(...)."
+      ],
+      [
+        "View not found",
+        "Lokasi/nama Blade salah",
+        "Periksa resources/views dan notasi titik."
+      ],
+      [
+        "Undefined variable",
+        "Nama compact dan view berbeda",
+        "Samakan nama variabel."
+      ],
+      [
+        "MassAssignmentException",
+        "$fillable belum tepat",
+        "Periksa atribut model."
+      ],
+      [
+        "419 Page Expired",
+        "Form tanpa CSRF",
+        "Tambahkan @csrf."
+      ],
+      [
+        "405 Method Not Allowed",
+        "POST/PUT/DELETE tidak sesuai",
+        "Periksa @method dan route resource."
+      ],
+      [
+        "CSS tidak tampil",
+        "Path asset salah/cache",
+        "Periksa public/css dan asset('css/style.css')."
+      ],
+      [
+        "Test gagal koneksi DB",
+        "Konfigurasi testing belum siap",
+        "Periksa phpunit.xml/.env.testing lalu jalankan ulang."
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Lampiran B — Pertanyaan Mendukung Observasi"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "No.",
+        "Pertanyaan",
+        "Indikator jawaban minimum",
+        "Unit"
+      ],
+      [
+        "1",
+        "Mengapa tabel products cukup untuk proyek ini?",
+        "Satu entitas; fokus CRUD dasar; tidak membutuhkan relasi.",
+        "U1/U2"
+      ],
+      [
+        "2",
+        "Apa fungsi migration, model, controller, route, dan view?",
+        "Skema DB; akses data; proses; arah request; tampilan.",
+        "U2/U4"
+      ],
+      [
+        "3",
+        "Apa fungsi $fillable?",
+        "Menentukan atribut yang boleh diisi massal.",
+        "U1/U4"
+      ],
+      [
+        "4",
+        "Mengapa harga integer dan min:0?",
+        "Harga bilangan bulat dan tidak boleh negatif.",
+        "U1/U5"
+      ],
+      [
+        "5",
+        "Bagaimana produk sampai ke landing page?",
+        "Controller query Product, kirim collection, Blade melakukan loop.",
+        "U2/U5"
+      ],
+      [
+        "6",
+        "Apa beda running dan debugging?",
+        "Running menjalankan; debugging menelusuri dan memperbaiki error.",
+        "U3/U7"
+      ],
+      [
+        "7",
+        "Mengapa route:list digunakan?",
+        "Memeriksa method, URI, action, dan nama route.",
+        "U3"
+      ],
+      [
+        "8",
+        "Apa fungsi @csrf dan @method?",
+        "Perlindungan CSRF dan simulasi HTTP PUT/DELETE.",
+        "U4/U5"
+      ],
+      [
+        "9",
+        "Mengapa @forelse dipakai?",
+        "Loop data sekaligus menangani collection kosong.",
+        "U5"
+      ],
+      [
+        "10",
+        "Apa beda store dan update?",
+        "Store membuat record baru; update mengubah record terikat.",
+        "U5"
+      ],
+      [
+        "11",
+        "Mengapa dokumentasi harus mengikuti kode aktual?",
+        "Agar dapat dijalankan, dipelihara, dan diverifikasi.",
+        "U6"
+      ],
+      [
+        "12",
+        "Langkah pertama saat Undefined variable?",
+        "Baca error, cek file/baris, bandingkan nama variabel.",
+        "U7"
+      ],
+      [
+        "13",
+        "Apa beda expected dan actual result?",
+        "Expected ditetapkan sebelum test; actual hasil nyata.",
+        "U8"
+      ],
+      [
+        "14",
+        "Mengapa data valid dan tidak valid diperlukan?",
+        "Menguji jalur normal dan penolakan input salah.",
+        "U8"
+      ],
+      [
+        "15",
+        "Kapan aplikasi siap diserahkan?",
+        "Fungsi minimum lulus, error kritis selesai, bukti lengkap.",
+        "U1-U8"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Lampiran C — Refleksi Peserta"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "Pernyataan refleksi",
+        "Jawaban"
+      ],
+      [
+        "Bagian yang paling saya kuasai",
+        ""
+      ],
+      [
+        "Bagian yang masih membingungkan",
+        ""
+      ],
+      [
+        "Error terpenting yang saya pelajari",
+        ""
+      ],
+      [
+        "Cara saya membuktikan bahwa kode adalah hasil kerja saya",
+        ""
+      ],
+      [
+        "Target latihan sebelum serkom",
+        ""
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Lampiran D — Ringkasan Perintah"
+  },
+  {
+    "type": "p",
+    "text": "CHEAT SHEET ARTISAN/COMPOSER"
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "composer install\nphp artisan key:generate\nphp artisan --version\nphp artisan about\nphp artisan config:clear\nphp artisan optimize:clear\nphp artisan make:model Product -m\nphp artisan make:controller ProductController --resource --model=Product\nphp artisan make:seeder ProductSeeder\nphp artisan make:test ProductFlowTest\nphp artisan migrate\nphp artisan migrate:status\nphp artisan db:seed\nphp artisan route:list\nphp artisan serve\nphp artisan test"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "Rujukan Utama"
+  },
+  {
+    "type": "p",
+    "text": "Keputusan Menteri Ketenagakerjaan Nomor 282 Tahun 2016 — SKKNI Software Development Subbidang Pemrograman. https://jdih.kemnaker.go.id/peraturan/detail/1381/keputusan-menaker-nomor-282-tahun-2016"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Installation. https://laravel.com/docs/12.x/installation"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Routing. https://laravel.com/docs/12.x/routing"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Controllers. https://laravel.com/docs/12.x/controllers"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Validation. https://laravel.com/docs/12.x/validation"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Migrations. https://laravel.com/docs/12.x/migrations"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Eloquent ORM. https://laravel.com/docs/12.x/eloquent"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — Blade Templates. https://laravel.com/docs/12.x/blade"
+  },
+  {
+    "type": "p",
+    "text": "Dokumentasi resmi Laravel 12 — HTTP Tests. https://laravel.com/docs/12.x/http-tests"
+  },
+  {
+    "type": "p",
+    "text": "Perangkat MUK sekolah/LSP: FR.APL.02, FR.IA.01, dan FR.IA.02 skema 016/SKEMA-PJ/RPL/2025."
+  },
+  {
+    "type": "table",
+    "rows": [
+      [
+        "CATATAN PENUTUP\nGunakan jobsheet ini berulang kali sampai peserta mampu menyelesaikan proyek tanpa bergantung pada langkah kode lengkap. Pada latihan berikutnya, guru dapat menghapus sebagian potongan kode dan mempertahankan hanya spesifikasi, checklist, serta kriteria hasil."
+      ]
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+node_modules
+.next
+.unit-tests
+package-lock.json
+src/lib/jobsheet.json
+src/lib/rangkuman.json
+test-results
+playwright-report
