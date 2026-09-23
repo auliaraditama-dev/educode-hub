@@ -15,7 +15,25 @@ import {
   Exam,
   References,
 } from "@/components/workbench";
+import { PracticeLab } from "@/components/practice-lab";
+import { OfflinePage } from "@/components/pwa-provider";
+import { DataCenter } from "@/components/data-center";
 const pages = {
+  keamanan: {
+    title: "Pusat Data & Pemulihan",
+    desc: "Snapshot, pencadangan, status penyimpanan, dan pemulihan progres lokal.",
+    Component: DataCenter,
+  },
+  "latihan-variasi": {
+    title: "Latihan Variasi & Perbaikan Kode",
+    desc: "Paket soal Laravel, PHP, Blade, dan JavaScript berganti saat refresh dan tersedia offline.",
+    Component: PracticeLab,
+  },
+  offline: {
+    title: "PWA & Belajar Offline",
+    desc: "Pasang EduCode Hub dan unduh materi serta latihan untuk belajar offline.",
+    Component: OfflinePage,
+  },
   jobsheet: {
     title: "Jobsheet Laravel 12",
     desc: "12 modul praktik Laravel 12 dari kebutuhan hingga pengujian dan dokumentasi.",
@@ -84,7 +102,7 @@ export async function generateMetadata({
 }) {
   const { section } = await params;
   const p = pages[section as Key];
-  if (!p) return {};
+  if (!Object.hasOwn(pages, section)) return {};
   return {
     ...metadata(p.title, p.desc, `/${section}`),
     ...(["catatan", "progress", "pengujian", "portofolio", "simulasi"].includes(
@@ -101,7 +119,7 @@ export default async function Page({
 }) {
   const { section } = await params;
   const p = pages[section as Key];
-  if (!p) notFound();
+  if (!Object.hasOwn(pages, section)) notFound();
   const Component = p.Component;
   return <Component />;
 }

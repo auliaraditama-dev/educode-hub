@@ -71,7 +71,11 @@ export default function Dashboard() {
                 Belajar mandiri
               </span>
             </div>
-            <Link className="button primary" href={`/jobsheet/${next.slug}`}>
+            <Link
+              prefetch={false}
+              className="button primary"
+              href={`/jobsheet/${next.slug}`}
+            >
               <Play size={15} fill="currentColor" />{" "}
               {done ? "Lanjutkan belajar" : "Mulai belajar"}
               <ArrowRight size={17} />
@@ -157,7 +161,7 @@ export default function Dashboard() {
               ? "Semua modul ditandai selesai. Periksa bukti praktikmu."
               : `${modules.length - done} modul lagi dalam perjalananmu.`}
           </p>
-          <Link href="/progress">
+          <Link prefetch={false} href="/progress">
             Lihat progres lengkap <ArrowUpRight size={16} />
           </Link>
         </section>
@@ -219,13 +223,14 @@ export default function Dashboard() {
               <h2>Learning path kamu</h2>
               <p>Langkah terarah dari fondasi hingga verifikasi.</p>
             </div>
-            <Link href="/jobsheet">
+            <Link prefetch={false} href="/jobsheet">
               Semua modul <ArrowRight size={15} />
             </Link>
           </div>
           <div className="path-list">
             {modules.slice(0, 4).map((m, i) => (
               <Link
+                prefetch={false}
                 href={`/jobsheet/${m.slug}`}
                 className="path-item"
                 key={m.id}
@@ -262,7 +267,9 @@ export default function Dashboard() {
           <div className="source-note">
             <BookOpen size={17} />
             <span>Disusun dari jobsheet & rangkuman persiapan SERKOM RPL.</span>
-            <Link href="/referensi">Lihat sumber</Link>
+            <Link prefetch={false} href="/referensi">
+              Lihat sumber
+            </Link>
           </div>
         </section>
         <aside className="practice-column">
@@ -272,7 +279,7 @@ export default function Dashboard() {
               <p>Pilih cara belajar yang cocok untukmu.</p>
             </div>
           </div>
-          <Link href="/flashcards" className="practice-card">
+          <Link prefetch={false} href="/flashcards" className="practice-card">
             <span className="icon-tile soft-violet">
               <Layers size={21} />
             </span>
@@ -285,7 +292,7 @@ export default function Dashboard() {
             </div>
             <ArrowUpRight size={18} />
           </Link>
-          <Link href="/tantangan" className="practice-card">
+          <Link prefetch={false} href="/tantangan" className="practice-card">
             <span className="icon-tile soft-blue">
               <Terminal size={21} />
             </span>
@@ -298,7 +305,7 @@ export default function Dashboard() {
             </div>
             <ArrowUpRight size={18} />
           </Link>
-          <Link href="/simulasi" className="exam-card">
+          <Link prefetch={false} href="/simulasi" className="exam-card">
             <div>
               <span className="tiny-label">SIAP UJI PEMAHAMAN?</span>
               <h3>Coba simulasi ujian</h3>

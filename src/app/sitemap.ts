@@ -9,6 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/flashcards",
     "/fillcode",
     "/tantangan",
+    "/latihan-variasi",
+    "/offline",
     "/referensi",
     "/referensi/jobsheet",
     "/referensi/rangkuman",

@@ -621,10 +621,13 @@ export const nav = [
   { href: "/flashcards", label: "Flashcards", icon: "cards" },
   { href: "/fillcode", label: "Lengkapi kode", icon: "code" },
   { href: "/tantangan", label: "Tantangan kode", icon: "terminal" },
+  { href: "/latihan-variasi", label: "Latihan variasi", icon: "code" },
   { href: "/simulasi", label: "Simulasi ujian", icon: "timer" },
   { href: "/pengujian", label: "Pengujian & debugging", icon: "test" },
   { href: "/catatan", label: "Catatan & bookmark", icon: "note" },
   { href: "/portofolio", label: "Portofolio", icon: "folder" },
   { href: "/progress", label: "Progres belajar", icon: "chart" },
   { href: "/referensi", label: "Dokumen referensi", icon: "library" },
+  { href: "/keamanan", label: "Pusat data", icon: "shield" },
+  { href: "/offline", label: "PWA & Offline", icon: "download" },
 ];

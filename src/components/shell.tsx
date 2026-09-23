@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import {
+  ShieldCheck,
+  Download,
   ArrowUp,
   CircleHelp,
   BookOpen,
@@ -27,10 +29,13 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useInteractions } from "./interaction-provider";
+import { PwaStatus } from "./pwa-provider";
 import { nav } from "@/lib/content";
 import { useProgress } from "./progress-provider";
 import { xpOf, levelOf } from "@/lib/progress";
 const icons: Record<string, typeof House> = {
+  shield: ShieldCheck,
+  download: Download,
   home: House,
   book: BookOpen,
   file: FileCode2,
@@ -46,7 +51,6 @@ const icons: Record<string, typeof House> = {
 };
 export function Shell({ children }: { children: ReactNode }) {
   const path = usePathname(),
-    router = useRouter(),
     [open, setOpen] = useState(false),
     [search, setSearch] = useState("");
   const { progress, update } = useProgress();
@@ -158,7 +162,12 @@ export function Shell({ children }: { children: ReactNode }) {
         className={`sidebar ${open ? "open" : ""}`}
         aria-label="Navigasi utama"
       >
-        <Link className="brand" href="/" onClick={() => setOpen(false)}>
+        <Link
+          prefetch={false}
+          className="brand"
+          href="/"
+          onClick={() => setOpen(false)}
+        >
           <span className="brand-icon">
             <Braces size={23} />
           </span>
@@ -176,16 +185,17 @@ export function Shell({ children }: { children: ReactNode }) {
         </button>
         <div className="workspace-label">WORKSPACE BELAJAR</div>
         <nav>
-          {nav.map((n, i) => {
+          {nav.map((n) => {
             const Icon = icons[n.icon];
             return (
               <div key={n.href}>
-                {i === 6 ? (
+                {n.href === "/simulasi" ? (
                   <div className="workspace-label section-label">
                     PERSIAPAN SERKOM
                   </div>
                 ) : null}
                 <Link
+                  prefetch={false}
                   onClick={() => setOpen(false)}
                   href={n.href}
                   className={`nav-item ${active?.href === n.href ? "active" : ""}`}
@@ -207,7 +217,7 @@ export function Shell({ children }: { children: ReactNode }) {
             Kopi Ulee Kareng <span>↗</span>
           </strong>
           <p>Laravel 12 · PHP · MySQL</p>
-          <Link href="/referensi">
+          <Link prefetch={false} href="/referensi">
             Lihat panduan proyek <ArrowUpRight size={15} />
           </Link>
         </div>
@@ -240,16 +250,11 @@ export function Shell({ children }: { children: ReactNode }) {
             <strong>{active?.label || "Materi belajar"}</strong>
           </div>
           <div className="top-actions">
-            <form
-              className="global-search"
-              onSubmit={(e) => {
-                e.preventDefault();
-                router.push("/cari?q=" + encodeURIComponent(search));
-              }}
-            >
+            <form className="global-search" action="/cari" method="get">
               <Search size={17} />
               <input
                 ref={searchInput}
+                name="q"
                 aria-label="Cari materi"
                 placeholder="Cari materi belajar..."
                 value={search}
@@ -306,6 +311,7 @@ export function Shell({ children }: { children: ReactNode }) {
             </button>
           </div>
         </header>
+        <PwaStatus />
         <main id="main" tabIndex={-1}>
           {children}
         </main>

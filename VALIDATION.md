@@ -1,67 +1,50 @@
-# Hasil validasi EduCode Hub
+# Validasi EduCode Hub 2.1 — PWA dan latihan variasi
 
-Pemeriksaan dilakukan 21–22 September 2026 pada build produksi lokal. Tidak ada deployment publik Vercel dalam sesi ini.
+Pemeriksaan 23 September 2026 pada build produksi lokal. Proyek berasal dari ZIP pengguna dan tidak mengubah ZIP asli. Belum dipublikasikan ke Vercel.
 
-| Pemeriksaan | Hasil aktual |
+## Hasil otomatis
+
+| Pemeriksaan | Hasil |
 | --- | --- |
-| Next.js production build | Berhasil, termasuk pemeriksaan TypeScript dan generasi halaman statis |
-| ESLint | Lulus setelah perbaikan ref React dan deklarasi timer |
-| Unit tests | 4 lulus: normalisasi impor, data rusak, round-trip cadangan, identitas materi |
-| HTTP smoke | 20 lulus: 19 endpoint berstatus 200 dan route tidak dikenal berstatus 404 |
-| Metadata | Canonical, konten modul SSR, dan JSON-LD terdeteksi pada respons HTML |
-| Referensi | Semua 18 anchor bagian rangkuman tersedia |
-| Dependensi produksi | `npm audit --omit=dev`: 0 kerentanan dilaporkan saat pemeriksaan |
-| Desktop | Screenshot beranda diperiksa pada viewport 1440 × 1000; konten dan navigasi tampil |
-| Ponsel | Lebar 375 px diperiksa untuk beranda, jobsheet, detail modul, cheatsheet, tantangan, pengujian, dan rangkuman; tidak ada overflow horizontal halaman setelah perbaikan |
-| Console browser | Tidak ada error tercatat pada pemeriksaan terakhir halaman-halaman tersebut |
+| Production build + TypeScript | Lulus; 30 halaman masuk paket offline |
+| ESLint | Lulus tanpa error/warning setelah perbaikan |
+| Unit/data/service-worker tests | 11 lulus |
+| Pergantian paket soal | 500 seed berturut-turut berbeda, masing-masing 6 soal lengkapi dan 6 perbaiki |
+| Progres lama | Normalisasi cadangan v2 mempertahankan progres lama; statistik latihan baru mendapat nilai default |
+| Service worker harness | Unduhan atomik, fallback offline, pencarian query, pengecualian RSC/POST/third-party, dan cache antarversi lulus |
+| HTTP smoke | 20 pemeriksaan lulus, termasuk dokumen, 18 anchor, SEO, runner dan 404 |
+| Paket PWA HTTP | Semua 59 URL sumber daya berstatus 200 tanpa redirect; BUILD_ID, header worker, manifest standalone, dan signature PNG valid |
 
-## Interaksi yang diperiksa melalui browser terhubung
+## Pemeriksaan browser saat server benar-benar dimatikan
 
-- Menyelesaikan modul memperbarui XP; status selesai pulih setelah reload.
-- Bookmark dan catatan dapat dimasukkan, dengan state tersimpan melalui provider progres.
-- Flashcard dapat dibalik dan ditandai dikuasai; tombol dikuasai menjadi nonaktif.
-- Jawaban `resource` pada latihan sintaks diterima dan input menjadi nonaktif.
-- Fungsi subtotal berbasis `reduce` melewati ketiga test case, termasuk array kosong.
-- Fungsi dengan `while(true)` dihentikan dengan pesan batas waktu 3 detik; portal tetap dapat digunakan.
-- Sesi simulasi dengan satu jawaban pulih setelah reload; pengumpulan menghasilkan 1/10 dan pembahasan.
-- Form pengujian menyediakan actual result dan status; hasil belum dapat ditandai lulus tanpa actual result.
-- Menu ponsel membuka navigasi dan menuju jobsheet; tema gelap diterapkan.
+- Halaman latihan variasi yang belum dikunjungi terbuka dari paket offline.
+- Refresh menghasilkan kode/paket berbeda dengan 12 soal.
+- Modul Blade, form & keamanan terbuka.
+- Pencarian `fillable` menampilkan hasil materi dan kedua dokumen.
+- Soal subtotal menerima `49800`; soal perbaikan menerima `const total = 24900 * 2;`.
+- Statistik 2 benar dari 2 pemeriksaan pulih setelah refresh; paket aktif kembali kosong dan berganti nomor.
+- Runner JavaScript dengan fungsi subtotal `reduce` melewati tiga test case secara offline.
+- Akses `localStorage` dari worker menghasilkan `localStorage is not defined`.
+- `while(true)` dihentikan setelah 3 detik; editor tetap dapat digunakan.
+- Tampilan kartu, form, feedback, notifikasi, dan scrollbar diperiksa di browser berlebar 405 px; lebar dokumen 395 px, tanpa overflow horizontal halaman.
+
+## Pembaruan aplikasi
+
+Paket pertama selesai menyimpan 59 sumber daya. Setelah build berikutnya tersedia, tombol pembaruan membuka konfirmasi, mengaktifkan worker baru, dan memuat ulang. Versi pada halaman offline berubah dari `v1YXcQjaV5Pt` ke `yDMeZu83lwS9`. Tombol pembaruan menghilang setelah aktivasi.
 
 ## Batas pemeriksaan
 
-Suite Playwright otomatis disertakan dalam `tests/e2e/portal.spec.ts`, tetapi **belum dijalankan menyeluruh dengan Playwright Test runner** karena peluncuran subprocess/browser lokal dibatasi lingkungan Windows sesi ini. Pemeriksaan interaktif dilakukan melalui browser Codex yang terhubung. Jangan menyebut seluruh suite E2E otomatis sudah lulus.
+Suite Playwright disertakan, termasuk `tests/e2e/pwa.spec.ts` untuk emulasi offline dan validasi manifest. **Seluruh suite Playwright otomatis belum selesai dijalankan dalam sesi ini**; jangan menyatakan semua E2E otomatis lulus. Interaksi offline di atas diuji melalui browser terhubung dengan server lokal dimatikan, bukan dengan mematikan jaringan perangkat.
 
-Ekspor/impor diuji pada tingkat normalisasi/round-trip data; alur unggah/unduh file browser tidak seluruhnya diverifikasi otomatis. Tidak dilakukan pengukuran Lighthouse, pengujian beban, audit aksesibilitas menyeluruh, pengujian seluruh kombinasi browser, maupun validasi hasil indexing mesin pencari.
+Pemasangan sebagai aplikasi mandiri pada Android/iOS belum diverifikasi pada perangkat fisik. Browser terhubung tidak menyediakan prompt instalasi native, sehingga UI menampilkan panduan pemasangan. Belum dilakukan audit Lighthouse, kuota/eviksi cache lintas browser, pengujian beban, atau deployment Vercel. Cache awal/pembaruan memerlukan internet dan HTTPS/localhost; data tetap lokal per browser.
 
-Progres dan skor adalah data latihan lokal yang dikelola pengguna, bukan bukti kompetensi yang diverifikasi server. Proyek Laravel/MySQL siswa dan feature test Laravel di dalam materi tidak dijalankan sebagai bagian dari pengujian portal Next.js.
+## Pembaruan 2.2 — perlindungan data
 
-## Menjalankan kembali
+- Audit `npm audit --omit=dev --json` melaporkan nol kerentanan produksi yang dikenal pada saat pemeriksaan.
+- Total 17 tes lulus, termasuk penolakan input rusak/terlalu besar, preservasi sumber rusak, pembatalan penggantian saat kuota backup habis, perlindungan konflik tab terdeteksi, batas tiga snapshot, dan normalisasi ID/bukti uji.
+- Build dengan TypeScript lulus; Pusat data masuk paket offline (31 halaman, 60 sumber daya).
+- Penanganan konflik localStorage bukan transaksi atomik. Batas lengkap tercatat dalam SECURITY.md. Tidak ada klaim pentest, sertifikasi keamanan, atau seluruh E2E otomatis lulus.
 
-```bash
-npm ci
-npm run typecheck
-npm run lint
-npm test
-npm run build
-npm run start
-```
+- Pemeriksaan HTTP versi 2.2 lulus untuk 60 sumber daya, manifest, ikon PNG, versi build, dan header worker.
+- Browser berhasil memperbarui paket ke SveCnfWcvCsj, menampilkan status tersimpan, membuat snapshot 100 XP, mempertahankannya setelah reload, serta membuka dan membatalkan dialog pemulihan. Tampilan kartu diperiksa pada viewport mobile.
 
-Pada terminal terpisah, ketika server sudah aktif:
-
-```bash
-node scripts/smoke.mjs
-npm run test:e2e
-```
-
-Untuk memeriksa deployment, set `TEST_BASE_URL` ke URL deployment sebelum menjalankan smoke test. Sesuaikan juga `baseURL` Playwright jika menguji domain remote. Pemeriksaan lokal tidak menggantikan smoke test setelah deploy.
-
-## Pemeriksaan pembaruan interaksi — 22 September 2026
-
-- Production build dengan TypeScript lulus setelah pembaruan dialog dan latihan. ESLint lulus. Empat unit test dan 20 HTTP smoke check lulus.
-- Browser terhubung: jawaban salah dengan Enter menampilkan pesan validasi; filter belum selesai menampilkan enam soal dari delapan ketika dua sudah selesai.
-- Modal reset: tombol hapus awalnya nonaktif, aktif setelah teks `RESET`, Escape membatalkan; fokus kembali ke tombol reset. Data pengguna tidak direset pada pemeriksaan ini.
-- Modal checkpoint menampilkan tujuan dan checkpoint sesuai modul Laravel. Tombol penyelesaian awalnya nonaktif dan menjadi aktif setelah checkbox dipilih melalui keyboard; pengujian dibatalkan sehingga tidak menambah progres pengguna.
-- Modal panduan interaksi menampilkan pintasan dan alur belajar.
-- Geometri DOM modal reset pada viewport 375 px berada di dalam layar (lebar modal 331 px, batas kanan 348 px); tidak ada overflow horizontal halaman. Penangkapan screenshot top-layer dialog pada browser terhubung tidak konsisten, sehingga pemeriksaan visual modal lintas browser tetap perlu dilakukan.
-- Suite E2E lama diperbarui untuk dialog baru; empat skenario tambahan disertakan dalam `tests/e2e/interactions.spec.ts`. Suite Playwright ini belum diklaim lulus otomatis karena batas subprocess yang dijelaskan di atas.
-- Pemeriksaan build terakhir setelah perbaikan menu: menu ponsel memberi fokus ke tombol tutup, membuat latar inert, mengunci scroll, dan Escape mengembalikan fokus ke tombol buka. Modal reset memberi fokus awal ke Batal. Console browser tidak mencatat error pada pemeriksaan terakhir.

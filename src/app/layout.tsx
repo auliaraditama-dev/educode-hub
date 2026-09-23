@@ -4,6 +4,8 @@ import { Shell } from "@/components/shell";
 import { siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./interactions.css";
+import "./pwa.css";
+import { PwaProvider } from "@/components/pwa-provider";
 import { InteractionProvider } from "@/components/interaction-provider";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -14,7 +16,13 @@ export const metadata: Metadata = {
   description:
     "Portal belajar Laravel 12: jobsheet Kopi Ulee Kareng, flashcards, latihan kode, simulasi, pengujian, dan portofolio SERKOM RPL.",
   applicationName: "EduCode Hub",
-  icons: { icon: "/icon.svg" },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "EduCode Hub",
+    statusBarStyle: "default",
+  },
+  icons: { icon: "/icon.svg", apple: "/icons/apple-touch-icon.png" },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
   openGraph: {
@@ -36,9 +44,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="id">
       <body>
         <InteractionProvider>
-          <ProgressProvider>
-            <Shell>{children}</Shell>
-          </ProgressProvider>
+          <PwaProvider>
+            <ProgressProvider>
+              <Shell>{children}</Shell>
+            </ProgressProvider>
+          </PwaProvider>
         </InteractionProvider>
       </body>
     </html>

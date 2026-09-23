@@ -5,6 +5,7 @@ export type TestResult = {
 };
 export type Progress = {
   version: 2;
+  practice: { attempts: number; correct: number };
   completedModules: number[];
   masteredFlashcards: number[];
   completedFills: number[];
@@ -23,6 +24,7 @@ export const STORAGE_KEY = "educode:progress:v2";
 export function emptyProgress(): Progress {
   return {
     version: 2,
+    practice: { attempts: 0, correct: 0 },
     completedModules: [],
     masteredFlashcards: [],
     completedFills: [],
@@ -53,10 +55,17 @@ function ids(x: unknown, max: number): number[] {
       ]
     : [];
 }
-function strings(x: unknown): Record<string, string> {
+function strings(x: unknown, maximum: number): Record<string, string> {
   return Object.fromEntries(
     Object.entries(object(x))
-      .filter(([k, v]) => /^\d{1,3}$/.test(k) && typeof v === "string")
+      .filter(
+        ([k, v]) =>
+          /^\d{1,3}$/.test(k) &&
+          Number(k) >= 1 &&
+          Number(k) <= maximum &&
+          String(Number(k)) === k &&
+          typeof v === "string",
+      )
       .slice(0, 100)
       .map(([k, v]) => [k, (v as string).slice(0, 20000)]),
   );
@@ -64,13 +73,22 @@ function strings(x: unknown): Record<string, string> {
 export function normalizeProgress(value: unknown): Progress {
   const raw = object(value),
     p = emptyProgress();
+  const practice = object(raw.practice);
+  const count = (value: unknown) =>
+    typeof value === "number" && Number.isSafeInteger(value) && value >= 0
+      ? Math.min(value, 100000000)
+      : 0;
+  p.practice = {
+    attempts: count(practice.attempts),
+    correct: Math.min(count(practice.correct), count(practice.attempts)),
+  };
   p.completedModules = ids(raw.completedModules, modules.length);
   p.masteredFlashcards = ids(raw.masteredFlashcards, flashcards.length);
   p.completedFills = ids(raw.completedFills, fills.length);
   p.completedProblems = ids(raw.completedProblems, problems.length);
   p.bookmarks = ids(raw.bookmarks, modules.length);
-  p.notes = strings(raw.notes);
-  p.drafts = strings(raw.drafts);
+  p.notes = strings(raw.notes, modules.length);
+  p.drafts = strings(raw.drafts, problems.length);
   p.debug = typeof raw.debug === "string" ? raw.debug.slice(0, 50000) : "";
   p.portfolio = Array.isArray(raw.portfolio)
     ? [
@@ -86,7 +104,11 @@ export function normalizeProgress(value: unknown): Progress {
     if (/^TC-(0[1-9]|10)$/.test(key))
       p.tests[key] = {
         status:
-          t.status === "lulus" || t.status === "gagal" ? t.status : "belum",
+          (t.status === "lulus" || t.status === "gagal") &&
+          typeof t.actual === "string" &&
+          t.actual.trim().length > 0
+            ? t.status
+            : "belum",
         actual: typeof t.actual === "string" ? t.actual.slice(0, 5000) : "",
       };
   }

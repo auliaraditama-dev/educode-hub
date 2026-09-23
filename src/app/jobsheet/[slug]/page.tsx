@@ -45,7 +45,7 @@ export default async function Page({
           __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
         }}
       />
-      <Link className="back-link" href="/jobsheet">
+      <Link prefetch={false} className="back-link" href="/jobsheet">
         <ArrowLeft size={15} />
         Semua jobsheet
       </Link>
@@ -86,6 +86,7 @@ export default async function Page({
           <span className="eyebrow">KURIKULUM</span>
           {modules.map((mod) => (
             <Link
+              prefetch={false}
               className={mod.id === m.id ? "selected" : ""}
               key={mod.id}
               href={`/jobsheet/${mod.slug}`}

@@ -1,0 +1,134 @@
+.pwa-status {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 8px 38px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 12px;
+  color: var(--muted);
+}
+.pwa-status a {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.pwa-status button {
+  color: var(--orange);
+  font-weight: 700;
+}
+.offline-panel {
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.offline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.offline-grid > .panel {
+  padding: 28px;
+}
+.offline-grid li {
+  margin-bottom: 12px;
+}
+.offline-grid ul {
+  padding-left: 20px;
+  color: var(--muted);
+}
+.practice-promo {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+  border-left: 4px solid var(--orange);
+}
+.practice-promo span {
+  color: var(--orange);
+}
+.practice-note {
+  color: var(--muted);
+  margin: 20px 0;
+}
+.practice-input {
+  width: 100%;
+  font-family: ui-monospace, monospace;
+}
+.practice-answer {
+  display: block;
+  margin: 16px 0 8px;
+  font-weight: 600;
+}
+.practice-solution {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 760px) {
+  .pwa-status {
+    padding: 8px 20px;
+  }
+  .offline-grid {
+    grid-template-columns: 1fr;
+  }
+  .practice-promo {
+    flex-direction: column;
+  }
+  .offline-panel,
+  .offline-grid > .panel {
+    padding: 20px;
+  }
+}
+.data-warning {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: #76391c;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 13px;
+}
+.data-warning a,
+.data-warning button {
+  text-decoration: underline;
+  color: white;
+  font-weight: 700;
+  margin-left: 12px;
+}
+.data-health {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.data-health dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+.data-health dd {
+  margin: 4px 0;
+  font-weight: 600;
+}
+.snapshot-list {
+  display: grid;
+  gap: 16px;
+}
+.snapshot-card {
+  padding: 20px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.snapshot-card h3 {
+  margin: 0;
+}
+.snapshot-card p {
+  color: var(--muted);
+}
+@media (max-width: 600px) {
+  .data-health {
+    grid-template-columns: 1fr;
+  }
+}

@@ -88,7 +88,7 @@ Contoh lama diperbaiki menjadi `nama_produk`, `max:100`, `unsignedInteger`, peny
 
 ## Eksekusi kode dan keamanan
 
-Kode latihan berjalan dalam Web Worker di iframe sandbox dengan origin terisolasi (`allow-scripts`, tanpa `allow-same-origin`). Halaman utama tidak menggunakan `eval` atau `new Function`. Route `/runner` memiliki CSP terpisah yang mengizinkan evaluasi hanya untuk latihan, memblokir jaringan (`connect-src 'none'`), dan worker dihentikan setelah 3 detik. Pesan hasil diperiksa sumber frame dan ID permintaannya. Batas input editor 20.000 karakter.
+Kode latihan berjalan dalam Web Worker di iframe sandbox dengan origin terisolasi (`allow-scripts`, tanpa `allow-same-origin`). Runner tersedia langsung melalui `srcDoc` sehingga tetap berjalan offline. Kode dimuat ke Blob Web Worker tanpa `eval` atau `new Function`; CSP iframe memblokir jaringan (`connect-src 'none'`) dan worker dihentikan setelah 3 detik. Route `/runner` tetap tersedia dengan pembatasan CSP yang sama. Pesan hasil diperiksa sumber frame dan ID permintaannya. Batas input editor 20.000 karakter.
 
 XP dan hasil ujian merupakan data lokal yang dapat diubah oleh pemilik browser; jangan gunakan sebagai bukti penilaian berisiko tinggi atau dasar sertifikasi. Jangan menambahkan kredensial ke worker atau mengubah iframe menjadi same-origin. Tidak ada eksekusi server terhadap kode kiriman pengguna.
 
@@ -137,3 +137,40 @@ Lihat `VALIDATION.md` untuk hasil pemeriksaan aktual dan batas pengujian sesi in
 - Latihan sintaks memiliki indikator progres, filter belum selesai, validasi dengan Enter, penanda input salah, dan tampilan ketika semua latihan selesai.
 - Menu ponsel mendukung Escape, penguncian scroll, fokus terbatas di menu, dan pengembalian fokus. `Ctrl/⌘ + K` memfokuskan pencarian ketika tidak ada dialog atau menu terbuka.
 - Semua kategori fitur, materi dokumen, penyimpanan progres versi 2, SEO, serta konfigurasi Vercel tetap tersedia. Tidak ada migrasi yang menghapus data pengguna.
+
+## PWA dan latihan variasi — versi 2.1
+
+Versi ini menggunakan ZIP `educode-hub.zip` pengguna sebagai dasar. Seluruh kategori fitur sebelumnya tetap tersedia; sumber ZIP asli tidak diubah.
+
+### Memasang dan memakai offline
+
+1. Jalankan `npm ci`, `npm run build`, lalu `npm start`. PWA sengaja tidak aktif dalam `npm run dev`.
+2. Buka situs melalui HTTPS atau `http://localhost:3000`. Buka **PWA & Offline** (`/offline`) dan tetap online sampai muncul **Paket offline siap**.
+3. Semua halaman publik yang diprerender, JavaScript, CSS, font, ikon, dokumen, serta runner latihan diunduh. Halaman yang belum pernah dibuka pun bisa diakses setelah paket selesai.
+4. Pilih **Pasang aplikasi** jika browser menyediakan prompt. Alternatifnya gunakan menu browser; iPhone memakai Safari → Bagikan → Tambahkan ke Layar Utama. Dukungan prompt instalasi tergantung browser.
+5. Setelah paket siap, putuskan koneksi lalu buka jobsheet, pencarian, atau latihan. Kunjungan pertama tetap membutuhkan internet. Aplikasi tidak bisa dipasang dari ZIP dengan membuka HTML langsung.
+6. Pembaruan tersedia melalui tombol **Gunakan versi baru** setelah unduhan lengkap. Halaman dimuat ulang setelah konfirmasi; jawaban variasi yang belum diperiksa akan hilang. Progres tersimpan tetap ada.
+
+`npm run build` menjalankan generator service worker sesudah Next.js selesai. Jangan menggantinya dengan `next build` langsung pada Vercel; gunakan build command `npm run build`. Worker memiliki versi dari BUILD_ID dan `Cache-Control: no-cache`. Cache hanya menyimpan sumber publik dari origin sendiri, tidak mencampur respons React Flight dengan HTML. Navigasi antarlaman memakai dokumen penuh saat service worker mengontrol halaman agar seluruh rute tetap dapat dipakai offline. Pencarian kini berjalan lokal terhadap materi dan dokumen yang dibundel.
+
+Cache dapat dibuang oleh browser saat ruang penyimpanan menipis. Pembersihan data situs menghapus cache dan progres. Ekspor cadangan berkala. Tautan eksternal, layanan Vercel, serta proyek PHP/MySQL di luar portal memerlukan lingkungan masing-masing. PWA ini tidak menjalankan server Laravel secara offline.
+
+### Latihan baru
+
+`/latihan-variasi` menyediakan 12 soal per paket: enam lengkapi kode dan enam perbaiki kode. Enam belas template menggunakan rotasi urutan dan parameter dinamis: angka harga, kuantitas, ID, dan konteks produk. Refresh atau tombol **Soal baru** menghasilkan paket berikutnya. Template dapat muncul kembali; ini bukan generator soal AI tanpa batas.
+
+- Topik: subtotal, konversi angka, equality, query Eloquent, findOrFail, update, route resource, escaping Blade, format rupiah, dan validasi harga sesuai jobsheet.
+- Petunjuk, feedback langsung, filter jenis soal, dan pembahasan dengan mode belajar.
+- Pemeriksa mengharapkan format jawaban contoh. Ia bukan parser PHP dan tidak mengklaim menerima semua kode ekuivalen. Tantangan JavaScript lama tetap memakai sandbox/test case.
+- Statistik benar/pemeriksaan disimpan dan ikut ekspor/impor progres v2 dalam field `practice`. Cadangan lama mendapatkan nilai awal nol. Latihan variasi tidak menggandakan XP latihan dasar.
+- Jawaban paket aktif tidak dipertahankan saat refresh; statistik hasil yang sudah diperiksa tetap tersimpan. Progres soal dasar lama tidak direset.
+
+Rujukan implementasi: [PWA Next.js](https://nextjs.org/docs/app/guides/progressive-web-apps) dan [Service worker MDN](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers).
+
+## Pusat data dan pemulihan — versi 2.2
+
+Menu **Pusat data** (`/keamanan`) menyediakan status penyimpanan, tiga snapshot lokal terakhir, pemulihan dengan konfirmasi, unduh snapshot, ekspor progres saat ini, ekspor data mentah, dan pembacaan ulang data tersimpan.
+
+Impor/reset/pemulihan membuat salinan data aktif terlebih dahulu. Jika salinan gagal disimpan, penggantian dibatalkan. Data yang rusak tidak ditimpa otomatis dengan progres kosong. Saat kuota habis atau konflik tab terdeteksi, banner menyediakan ekspor perubahan di memori; lakukan ekspor sebelum berpindah halaman. Snapshot dan area pemulihan tetap tersimpan setelah reset progres agar dapat dipulihkan, tetapi ikut hilang jika data situs dihapus dari browser.
+
+Lihat `SECURITY.md` untuk perlindungan yang diterapkan, hasil audit dependensi, dan batas keamanan. Portal tetap berupa aplikasi belajar lokal tanpa akun atau backend multiuser. Tidak ada jaminan keamanan absolut.

@@ -19,13 +19,13 @@ import {
   testCases,
   portfolioItems,
 } from "@/lib/content";
+import { parseBackup } from "@/lib/safety";
 import { useInteractions } from "./interaction-provider";
 import { useProgress } from "./progress-provider";
 import { PageHeading, Meter } from "./ui";
 import {
   download,
   emptyProgress,
-  normalizeProgress,
   xpOf,
   levelOf,
   type Progress,
@@ -62,7 +62,7 @@ export function Notes() {
         {visible.map((m) => (
           <article className="panel" key={m.id}>
             <div className="section-top">
-              <Link href={`/jobsheet/${m.slug}`}>
+              <Link prefetch={false} href={`/jobsheet/${m.slug}`}>
                 <h2>{m.title}</h2>
               </Link>
               <button
@@ -340,7 +340,7 @@ export function Portfolio() {
 }
 export function ProgressPage() {
   const { confirm } = useInteractions();
-  const { progress, update, notify } = useProgress();
+  const { progress, replace, notify } = useProgress();
   const file = useRef<HTMLInputElement>(null);
   const xp = xpOf(progress),
     level = levelOf(xp);
@@ -385,6 +385,16 @@ export function ProgressPage() {
           </section>
         ))}
       </div>
+      <section className="panel result-summary">
+        <h2>Latihan variasi</h2>
+        <p>
+          {progress.practice.correct} jawaban benar dari{" "}
+          {progress.practice.attempts} pemeriksaan. Tidak menambah XP dasar.
+        </p>
+        <Link prefetch={false} href="/latihan-variasi" className="text-link">
+          Buka paket latihan baru →
+        </Link>
+      </section>
       {progress.exam ? (
         <section className="panel result-summary">
           <h2>Simulasi terakhir</h2>
@@ -428,13 +438,13 @@ export function ProgressPage() {
                 await confirm({
                   title: "Reset seluruh progres?",
                   description:
-                    "Catatan, hasil uji, draft kode, dan progres pada perangkat ini akan dihapus. Ekspor cadangan terlebih dahulu; tindakan ini tidak dapat dibatalkan.",
+                    "Catatan, hasil uji, draft kode, dan progres pada perangkat ini akan dihapus. Ekspor cadangan terlebih dahulu; snapshot pemulihan dibuat sebelum penggantian data.",
                   tone: "danger",
                   requireText: "RESET",
                   accept: "Hapus progres",
                 })
               ) {
-                update(() => emptyProgress());
+                if (!replace(emptyProgress(), "Sebelum reset progres")) return;
                 try {
                   [
                     "edu_modules",
@@ -469,10 +479,7 @@ export function ProgressPage() {
               return;
             }
             try {
-              const raw = JSON.parse(await selected.text());
-              if (raw?.version !== 2 || !Array.isArray(raw.completedModules))
-                throw new Error("format");
-              const imported = normalizeProgress(raw);
+              const imported = parseBackup(await selected.text());
               if (
                 await confirm({
                   title: "Impor cadangan belajar?",
@@ -486,7 +493,7 @@ export function ProgressPage() {
                   ],
                 })
               ) {
-                update(() => imported);
+                if (!replace(imported, "Sebelum impor cadangan")) return;
                 notify("Cadangan berhasil diimpor.", "success");
               }
             } catch {
@@ -761,6 +768,7 @@ export function References() {
           },
         ].map((d) => (
           <Link
+            prefetch={false}
             className="panel reference-card"
             href={`/referensi/${d.slug}`}
             key={d.slug}

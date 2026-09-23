@@ -20,6 +20,7 @@ import {
   fills,
   problems,
 } from "@/lib/content";
+import { runnerHtml } from "@/lib/runner";
 import { useInteractions } from "./interaction-provider";
 import { useProgress } from "./progress-provider";
 import { CodeBlock, PageHeading, Meter } from "./ui";
@@ -63,7 +64,12 @@ export function Jobsheets() {
       </div>
       <div className="module-grid">
         {filtered.map((m) => (
-          <Link key={m.id} href={`/jobsheet/${m.slug}`} className="module-card">
+          <Link
+            prefetch={false}
+            key={m.id}
+            href={`/jobsheet/${m.slug}`}
+            className="module-card"
+          >
             <div className="section-top">
               <span className="module-id">{String(m.id).padStart(2, "0")}</span>
               <span className="status-badge">
@@ -170,6 +176,7 @@ export function LessonTools({ id }: { id: number }) {
       <div className="lesson-navigation">
         {id > 1 ? (
           <Link
+            prefetch={false}
             className="button secondary"
             href={`/jobsheet/${modules[id - 2].slug}`}
           >
@@ -181,6 +188,7 @@ export function LessonTools({ id }: { id: number }) {
         )}
         {id < modules.length ? (
           <Link
+            prefetch={false}
             className="button secondary"
             href={`/jobsheet/${modules[id].slug}`}
           >
@@ -188,13 +196,18 @@ export function LessonTools({ id }: { id: number }) {
             <ArrowRight size={16} />
           </Link>
         ) : (
-          <Link className="button secondary" href="/portofolio">
+          <Link
+            prefetch={false}
+            className="button secondary"
+            href="/portofolio"
+          >
             Periksa portofolio
             <ArrowRight size={16} />
           </Link>
         )}
       </div>
       <Link
+        prefetch={false}
         className="text-link"
         href={`/referensi/rangkuman#bagian-${m.reference}`}
       >
@@ -408,6 +421,14 @@ export function FillCode() {
         title="Satu bagian kecil. Satu pemahaman baru."
         description="Lengkapi sintaks yang hilang. Setiap latihan memberikan 20 XP satu kali."
       />
+      <Link
+        prefetch={false}
+        className="panel practice-promo"
+        href="/latihan-variasi"
+      >
+        <strong>Butuh soal yang selalu berganti?</strong>
+        <span>Coba 12 soal variasi sintaks & perbaikan kode →</span>
+      </Link>
       <div className="panel practice-toolbar">
         <div className="practice-progress">
           <strong>
@@ -434,7 +455,7 @@ export function FillCode() {
           <Check size={32} />
           <h2>Semua sintaks sudah dikuasai!</h2>
           <p>Lanjutkan praktik CRUD Kopi Ulee Kareng pada jobsheet.</p>
-          <Link href="/jobsheet" className="button primary">
+          <Link prefetch={false} href="/jobsheet" className="button primary">
             Lanjut ke jobsheet <ArrowRight size={16} />
           </Link>
         </div>
@@ -516,13 +537,14 @@ export function Challenges() {
     [busy, setBusy] = useState(false),
     [hint, setHint] = useState(false);
   const frame = useRef<HTMLIFrameElement>(null);
+  const [runnerReady, setRunnerReady] = useState(false);
   const cleanupRef = useRef<(() => void) | null>(null);
   const p = problems.find((p) => p.id === selected)!;
   const initial = `function ${p.fn}(${p.arg}) {\n  // Tulis solusi kamu di sini\n  return 0;\n}`;
   const code = progress.drafts[String(p.id)] ?? initial;
   useEffect(() => () => cleanupRef.current?.(), []);
   function run() {
-    if (busy || !frame.current?.contentWindow) return;
+    if (busy || !runnerReady || !frame.current?.contentWindow) return;
     setBusy(true);
     setOutput("Menjalankan test case…");
     const id = crypto.randomUUID();
@@ -669,7 +691,11 @@ export function Challenges() {
                 <RotateCcw size={15} />
                 Reset
               </button>
-              <button className="button primary" disabled={busy} onClick={run}>
+              <button
+                className="button primary"
+                disabled={busy || !runnerReady}
+                onClick={run}
+              >
                 <Play size={14} />
                 {busy ? "Menjalankan…" : "Jalankan kode"}
               </button>
@@ -691,7 +717,8 @@ export function Challenges() {
       </div>
       <iframe
         ref={frame}
-        src="/runner"
+        srcDoc={runnerHtml}
+        onLoad={() => setRunnerReady(true)}
         sandbox="allow-scripts"
         title="Sandbox eksekusi kode"
         className="runner-frame"

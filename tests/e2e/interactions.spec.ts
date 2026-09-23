@@ -4,7 +4,9 @@ test("cancel and Escape preserve data; reset requires an exact acknowledgement",
   page,
 }) => {
   await page.goto("/progress");
-  const before = await page.getByRole("heading", { name: /XP terkumpul/ }).textContent();
+  const before = await page
+    .getByRole("heading", { name: /XP terkumpul/ })
+    .textContent();
   const trigger = page.getByRole("button", {
     name: "Reset progres",
     exact: true,
@@ -27,7 +29,9 @@ test("cancel and Escape preserve data; reset requires an exact acknowledgement",
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(trigger).toBeFocused();
-  expect(await page.getByRole("heading", { name: /XP terkumpul/ }).textContent()).toBe(before);
+  expect(
+    await page.getByRole("heading", { name: /XP terkumpul/ }).textContent(),
+  ).toBe(before);
 });
 
 test("checkpoint confirmation is reversible and records progress once", async ({

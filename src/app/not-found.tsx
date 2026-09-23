@@ -8,7 +8,7 @@ export default function NotFound() {
         Alamat mungkin sudah berubah. Kembali ke daftar jobsheet untuk
         melanjutkan.
       </p>
-      <Link className="button primary" href="/jobsheet">
+      <Link prefetch={false} className="button primary" href="/jobsheet">
         Buka jobsheet
       </Link>
     </div>

@@ -30,7 +30,7 @@ export default async function Page({
   if (!doc) notFound();
   return (
     <>
-      <Link className="back-link" href="/referensi">
+      <Link prefetch={false} className="back-link" href="/referensi">
         ← Semua referensi
       </Link>
       <article className="document-reader">
