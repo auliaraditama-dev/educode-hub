@@ -1,5 +1,25 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import ts from "typescript";
+const themeModule = { exports: {} };
+const themeCode = ts.transpileModule(
+  await readFile("src/lib/theme.ts", "utf8"),
+  {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2020,
+    },
+  },
+).outputText;
+new Function("exports", "module", themeCode)(themeModule.exports, themeModule);
+const fallback = await readFile("public/offline.html", "utf8");
+await writeFile(
+  "public/offline.html",
+  fallback.replace(
+    /<script>[\s\S]*?<\/script>/,
+    `<script>${themeModule.exports.themeBootstrap}</script>`,
+  ),
+);
 async function files(dir) {
   const found = await readdir(dir, { withFileTypes: true });
   return (
@@ -40,13 +60,16 @@ const urls = [
     "/icons/apple-touch-icon.png",
   ]),
 ];
-for (const required of ["/", "/cari", "/latihan-variasi", "/offline"])
+for (const required of ["/", "/cari", "/latihan", "/offline"])
   if (!urls.includes(required))
     throw new Error(`Missing static offline route: ${required}`);
 const template = await readFile("scripts/sw-template.js", "utf8");
 await writeFile(
   "public/sw.js",
-  template.replace("/* PWA_CONFIG */ null", JSON.stringify({ version, urls })),
+  template.replace(
+    "/* PWA_CONFIG */ null",
+    JSON.stringify({ version, urls, builtAt: new Date().toISOString() }),
+  ),
 );
 await writeFile(
   "public/offline-build.json",

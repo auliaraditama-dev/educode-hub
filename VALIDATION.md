@@ -4,16 +4,16 @@ Pemeriksaan 23 September 2026 pada build produksi lokal. Proyek berasal dari ZIP
 
 ## Hasil otomatis
 
-| Pemeriksaan | Hasil |
-| --- | --- |
-| Production build + TypeScript | Lulus; 30 halaman masuk paket offline |
-| ESLint | Lulus tanpa error/warning setelah perbaikan |
-| Unit/data/service-worker tests | 11 lulus |
-| Pergantian paket soal | 500 seed berturut-turut berbeda, masing-masing 6 soal lengkapi dan 6 perbaiki |
-| Progres lama | Normalisasi cadangan v2 mempertahankan progres lama; statistik latihan baru mendapat nilai default |
-| Service worker harness | Unduhan atomik, fallback offline, pencarian query, pengecualian RSC/POST/third-party, dan cache antarversi lulus |
-| HTTP smoke | 20 pemeriksaan lulus, termasuk dokumen, 18 anchor, SEO, runner dan 404 |
-| Paket PWA HTTP | Semua 59 URL sumber daya berstatus 200 tanpa redirect; BUILD_ID, header worker, manifest standalone, dan signature PNG valid |
+| Pemeriksaan                    | Hasil                                                                                                                        |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Production build + TypeScript  | Lulus; 30 halaman masuk paket offline                                                                                        |
+| ESLint                         | Lulus tanpa error/warning setelah perbaikan                                                                                  |
+| Unit/data/service-worker tests | 11 lulus                                                                                                                     |
+| Pergantian paket soal          | 500 seed berturut-turut berbeda, masing-masing 6 soal lengkapi dan 6 perbaiki                                                |
+| Progres lama                   | Normalisasi cadangan v2 mempertahankan progres lama; statistik latihan baru mendapat nilai default                           |
+| Service worker harness         | Unduhan atomik, fallback offline, pencarian query, pengecualian RSC/POST/third-party, dan cache antarversi lulus             |
+| HTTP smoke                     | 20 pemeriksaan lulus, termasuk dokumen, 18 anchor, SEO, runner dan 404                                                       |
+| Paket PWA HTTP                 | Semua 59 URL sumber daya berstatus 200 tanpa redirect; BUILD_ID, header worker, manifest standalone, dan signature PNG valid |
 
 ## Pemeriksaan browser saat server benar-benar dimatikan
 
@@ -47,4 +47,8 @@ Pemasangan sebagai aplikasi mandiri pada Android/iOS belum diverifikasi pada per
 
 - Pemeriksaan HTTP versi 2.2 lulus untuk 60 sumber daya, manifest, ikon PNG, versi build, dan header worker.
 - Browser berhasil memperbarui paket ke SveCnfWcvCsj, menampilkan status tersimpan, membuat snapshot 100 XP, mempertahankannya setelah reload, serta membuka dan membatalkan dialog pemulihan. Tampilan kartu diperiksa pada viewport mobile.
+
+## Validasi versi 2.3
+
+Lihat [AUDIT-2.3.md](AUDIT-2.3.md) untuk pemeriksaan source terbaru. Bagian versi sebelumnya di atas adalah riwayat, bukan laporan pengujian versi 2.3.
 

@@ -7,9 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/jobsheet",
     "/cheatsheet",
     "/flashcards",
-    "/fillcode",
+    "/latihan",
     "/tantangan",
-    "/latihan-variasi",
+
     "/offline",
     "/referensi",
     "/referensi/jobsheet",

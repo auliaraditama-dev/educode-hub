@@ -3,12 +3,12 @@ import { test, expect } from "@playwright/test";
 test("cancel and Escape preserve data; reset requires an exact acknowledgement", async ({
   page,
 }) => {
-  await page.goto("/progress");
+  await page.goto("/keamanan");
   const before = await page
-    .getByRole("heading", { name: /XP terkumpul/ })
+    .locator(".data-health")
     .textContent();
   const trigger = page.getByRole("button", {
-    name: "Reset progres",
+    name: "Reset Seluruh Data Belajar",
     exact: true,
   });
   await trigger.click();
@@ -30,7 +30,7 @@ test("cancel and Escape preserve data; reset requires an exact acknowledgement",
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(trigger).toBeFocused();
   expect(
-    await page.getByRole("heading", { name: /XP terkumpul/ }).textContent(),
+    await page.locator(".data-health").textContent(),
   ).toBe(before);
 });
 
@@ -85,3 +85,4 @@ test("mobile navigation traps keyboard focus and closes with Escape", async ({
   await expect(menu).toBeFocused();
   await expect(menu).toHaveAttribute("aria-expanded", "false");
 });
+

@@ -55,16 +55,18 @@ export function PracticeLab() {
       <PageHeading
         eyebrow="LAB LATIHAN VARIASI"
         title="Baca. Perbaiki. Coba lagi."
-        description="12 soal per paket: lengkapi sintaks dan perbaiki satu baris kode. Template, urutan, dan data berganti saat refresh; semua soal bekerja offline setelah paket aplikasi tersimpan."
+        description="Paket soal: lengkapi sintaks dan perbaiki satu baris kode. Template, urutan, dan data berganti saat refresh; semua soal bekerja offline setelah paket aplikasi tersimpan."
       />
       <div className="panel practice-toolbar">
         <div className="practice-progress">
           <strong>
-            Paket {seed ?? "…"} · {solved.length} / 12 benar
+            Paket {seed ?? "…"} · {solved.length} / {exercises.length} benar
           </strong>
           <Meter
             label="Progres paket variasi"
-            value={(solved.length / 12) * 100}
+            value={
+              exercises.length ? (solved.length / exercises.length) * 100 : 0
+            }
           />
         </div>
         <button
@@ -226,9 +228,10 @@ export function PracticeLab() {
         PHP atau menerima semua solusi ekuivalen. Bank 16 template memiliki
         variasi data; template dapat muncul kembali pada paket berikutnya.
       </p>
-      <Link prefetch={false} className="button secondary" href="/fillcode">
+      <Link prefetch={false} className="button secondary" href="/latihan">
         Kembali ke latihan dasar dan XP
       </Link>
     </>
   );
 }
+

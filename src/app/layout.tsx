@@ -1,10 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { ThemeProvider } from "@/components/theme-provider";
+import { themeBootstrap } from "@/lib/theme";
 import { ProgressProvider } from "@/components/progress-provider";
 import { Shell } from "@/components/shell";
 import { siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./interactions.css";
 import "./pwa.css";
+import "./refinements.css";
 import { PwaProvider } from "@/components/pwa-provider";
 import { InteractionProvider } from "@/components/interaction-provider";
 export const metadata: Metadata = {
@@ -39,17 +42,31 @@ export const metadata: Metadata = {
     description: "Jobsheet, flashcards, dan latihan kode SERKOM RPL.",
   },
 };
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f8fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#141923" },
+  ],
+};
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
+      <head>
+        <script
+          id="educode-theme"
+          dangerouslySetInnerHTML={{ __html: themeBootstrap }}
+        />
+      </head>
       <body>
-        <InteractionProvider>
-          <PwaProvider>
-            <ProgressProvider>
-              <Shell>{children}</Shell>
-            </ProgressProvider>
-          </PwaProvider>
-        </InteractionProvider>
+        <ThemeProvider>
+          <InteractionProvider>
+            <PwaProvider>
+              <ProgressProvider>
+                <Shell>{children}</Shell>
+              </ProgressProvider>
+            </PwaProvider>
+          </InteractionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

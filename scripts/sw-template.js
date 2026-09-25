@@ -53,6 +53,7 @@ self.addEventListener("message", (event) => {
           ready: Boolean(await cache.match(MARKER)),
           version: CONFIG.version,
           count: CONFIG.urls.length,
+          builtAt: CONFIG.builtAt,
         });
       })(),
     );
@@ -78,6 +79,15 @@ self.addEventListener("fetch", (event) => {
           if (response.status < 500) return response;
         } catch {}
         // Search runs locally; any query uses the same pre-rendered search page.
+        const legacy = {
+          "/fillcode": "/latihan",
+          "/latihan-variasi": "/latihan?tab=variasi",
+        }[url.pathname];
+        if (legacy)
+          return Response.redirect(
+            new URL(legacy, self.location.origin).href,
+            302,
+          );
         return (
           (await fromCache(url.pathname)) || (await fromCache("/offline.html"))
         );
@@ -85,7 +95,16 @@ self.addEventListener("fetch", (event) => {
     );
     return;
   }
-  if (CONFIG.urls.includes(url.pathname))
+  if (
+    request.destination !== "document" &&
+    (request.headers.get("Accept") || "").includes("text/x-component")
+  )
+    return;
+  if (
+    CONFIG.urls.includes(url.pathname) &&
+    !url.search &&
+    !request.headers.has("Next-Router-State-Tree")
+  )
     event.respondWith(
       (async () => {
         const hit = await fromCache(url.pathname);

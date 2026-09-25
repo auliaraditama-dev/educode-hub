@@ -1,1 +1,110 @@
-<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ed683c"><title>Halaman belum tersedia offline · EduCode Hub</title><style>body{font:16px/1.7 system-ui;margin:0;background:#141923;color:#e9edf4;display:grid;place-items:center;min-height:100vh}main{max-width:480px;padding:32px}a{display:inline-block;background:#ed683c;color:white;padding:12px 20px;border-radius:12px;text-decoration:none}p{color:#b7c1d2}</style><main><h1>Kembali ke ruang belajar.</h1><p>Alamat ini belum tersedia dalam paket offline. Materi dan latihan yang sudah diunduh dapat dibuka melalui beranda. Sambungkan internet untuk alamat lainnya.</p><a href="/">Buka beranda offline</a></main></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#141923" />
+    <title>Halaman belum tersedia offline | EduCode Hub</title>
+    <script>(function bootstrapTheme() {
+    const root = document.documentElement;
+    let preference = "system";
+    try {
+        const stored = localStorage.getItem("educode:theme");
+        if (["light", "dark", "system"].includes(stored || ""))
+            preference = stored;
+        else if (stored === null) {
+            let legacy;
+            try {
+                legacy = JSON.parse(localStorage.getItem("educode:progress:v2") || "null")?.theme;
+            }
+            catch { }
+            if (legacy !== "dark" && legacy !== "light")
+                legacy = localStorage.getItem("edu_theme");
+            if (legacy === "dark" || legacy === "light") {
+                preference = legacy;
+                try {
+                    localStorage.setItem("educode:theme", preference);
+                }
+                catch { }
+            }
+        }
+    }
+    catch { }
+    const resolved = preference === "system"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
+        : preference;
+    root.dataset.theme = resolved;
+    root.dataset.themePreference = preference;
+    root.style.colorScheme = resolved;
+    root.style.backgroundColor = resolved === "dark" ? "#141923" : "#f7f8fa";
+    document
+        .querySelectorAll('meta[name="theme-color"]')
+        .forEach((meta) => {
+        meta.content = resolved === "dark" ? "#141923" : "#f7f8fa";
+        meta.removeAttribute("media");
+    });
+})()</script>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fa;
+        --text: #222837;
+        --button: #ba401d;
+        --on: #fff;
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #141923;
+        --text: #e9edf4;
+        --button: #ff9067;
+        --on: #141923;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          color-scheme: dark;
+          --bg: #141923;
+          --text: #e9edf4;
+          --button: #ff9067;
+          --on: #141923;
+        }
+      }
+      body {
+        font: 16px/1.7 system-ui;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+      }
+      main {
+        max-width: 480px;
+        padding: 24px;
+      }
+      a {
+        display: inline-block;
+        background: var(--button);
+        color: var(--on);
+        padding: 12px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+      }
+      a:focus-visible {
+        outline: 3px solid currentColor;
+        outline-offset: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Kembali ke ruang belajar.</h1>
+      <p>
+        Alamat ini belum tersedia dalam paket offline. Materi yang sudah diunduh
+        dapat dibuka melalui beranda. Sambungkan internet untuk alamat lainnya.
+      </p>
+      <a href="/">Buka beranda offline</a>
+    </main>
+  </body>
+</html>

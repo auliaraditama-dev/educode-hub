@@ -3,6 +3,16 @@ const config: NextConfig = {
   turbopack: { root: process.cwd() },
   experimental: { workerThreads: true, cpus: 2, useTypeScriptCli: false },
   poweredByHeader: false,
+  async redirects() {
+    return [
+      { source: "/fillcode", destination: "/latihan", permanent: true },
+      {
+        source: "/latihan-variasi",
+        destination: "/latihan?tab=variasi",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

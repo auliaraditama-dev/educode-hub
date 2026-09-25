@@ -1,4 +1,11 @@
-import { modules, flashcards, fills, problems } from "./content";
+import {
+  modules,
+  flashcards,
+  fills,
+  problems,
+  testCases,
+  portfolioItems,
+} from "./content";
 export type TestResult = {
   status: "belum" | "lulus" | "gagal";
   actual: string;
@@ -18,7 +25,6 @@ export type Progress = {
   drafts: Record<string, string>;
   exam: { score: number; total: number; date: string } | null;
   lastModule: number;
-  theme: "light" | "dark";
 };
 export const STORAGE_KEY = "educode:progress:v2";
 export function emptyProgress(): Progress {
@@ -37,7 +43,6 @@ export function emptyProgress(): Progress {
     drafts: {},
     exam: null,
     lastModule: 1,
-    theme: "light",
   };
 }
 const object = (x: unknown): Record<string, unknown> =>
@@ -94,14 +99,16 @@ export function normalizeProgress(value: unknown): Progress {
     ? [
         ...new Set(
           raw.portfolio.filter(
-            (v): v is string => typeof v === "string" && /^\d$/.test(v),
+            (v): v is string =>
+              typeof v === "string" &&
+              portfolioItems.some((_, i) => String(i) === v),
           ),
         ),
       ]
     : [];
   for (const [key, val] of Object.entries(object(raw.tests))) {
     const t = object(val);
-    if (/^TC-(0[1-9]|10)$/.test(key))
+    if (testCases.some(([id]) => id === key))
       p.tests[key] = {
         status:
           (t.status === "lulus" || t.status === "gagal") &&
@@ -129,7 +136,6 @@ export function normalizeProgress(value: unknown): Progress {
       date: exam.date,
     };
   p.lastModule = ids([raw.lastModule], modules.length)[0] || 1;
-  p.theme = raw.theme === "dark" ? "dark" : "light";
   return p;
 }
 export function xpOf(p: Progress) {

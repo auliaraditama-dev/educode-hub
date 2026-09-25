@@ -40,29 +40,29 @@ Source sudah dibuild dan disiapkan untuk Vercel; paket ini tidak menyatakan bahw
 
 ## Fitur
 
-| Area | Fitur |
-| --- | --- |
-| Overview | Ringkasan progres aktual, kelanjutan modul, statistik, akses latihan |
-| Jobsheet | 12 modul, tujuan, contoh kode, checkpoint, navigasi, bookmark, catatan |
-| Cheatsheet | 12 referensi, pencarian, filter Artisan/Blade/PHP/Laravel, salin kode |
-| Flashcards | 20 kartu, flip keyboard/mouse, acak, maju/mundur, status dikuasai, filter review |
-| Lengkapi kode | 8 soal sintaks, petunjuk, validasi jawaban, status selesai |
-| Tantangan kode | 4 soal JavaScript, draft per soal, reset, petunjuk, pembahasan, actual/expected tiap test |
-| Simulasi | 10 soal, durasi 10/20/30 menit, sesi pulih setelah reload, timer berbasis deadline, auto-submit, pembahasan |
-| Pengujian | TC-01 sampai TC-10, actual result, status, log debugging, ekspor Markdown |
-| Portofolio | 10 checklist bukti, panduan presentasi, ekspor laporan dan catatan |
-| Progres | XP, level, semua kategori termasuk fill-code, ekspor/impor JSON tervalidasi, reset khusus data EduCode |
-| Referensi | Transkripsi lengkap teks dan tabel kedua DOCX, daftar isi rangkuman, kode, pencarian global |
-| UI | Sidebar desktop, menu ponsel, tema terang/gelap, keyboard focus, skip link, status aksesibel, print stylesheet |
+| Area           | Fitur                                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------------------------- |
+| Overview       | Ringkasan progres aktual, kelanjutan modul, statistik, akses latihan                                           |
+| Jobsheet       | 12 modul, tujuan, contoh kode, checkpoint, navigasi, bookmark, catatan                                         |
+| Cheatsheet     | 12 referensi, pencarian, filter Artisan/Blade/PHP/Laravel, salin kode                                          |
+| Flashcards     | 20 kartu, flip keyboard/mouse, acak, maju/mundur, status dikuasai, filter review                               |
+| Lengkapi kode  | 8 soal sintaks, petunjuk, validasi jawaban, status selesai                                                     |
+| Tantangan kode | 4 soal JavaScript, draft per soal, reset, petunjuk, pembahasan, actual/expected tiap test                      |
+| Simulasi       | Bank 12 soal mandiri, urutan soal/opsi acak, analisis kategori, durasi 10/20/30 menit, sesi pulih setelah reload, timer berbasis deadline, auto-submit, pembahasan    |
+| Pengujian      | TC-01 sampai TC-10, actual result, status, log debugging, ekspor Markdown                                      |
+| Portofolio     | 10 checklist bukti, panduan presentasi, ekspor laporan dan catatan                                             |
+| Progres        | XP, level, semua kategori termasuk latihan, ringkasan hasil, tautan ke Pusat data         |
+| Referensi      | Transkripsi lengkap teks dan tabel kedua DOCX, daftar isi rangkuman, kode, pencarian global                    |
+| UI             | Sidebar desktop, menu ponsel, tema terang/gelap/sistem, keyboard focus, skip link, status aksesibel, print stylesheet |
 
 ## Penyimpanan dan migrasi
 
 - Progres menggunakan `localStorage` dengan skema versi 2: `educode:progress:v2`.
 - XP dihitung dari penyelesaian unik: modul 50, flashcard 10, fill-code 20, tantangan 100. Mengulang tidak menggandakan XP.
-- Halaman Progres menyediakan ekspor/impor cadangan. Maksimal berkas impor 2 MB. Impor mengganti progres setelah konfirmasi; tidak menggabungkan otomatis.
+- Pusat data (`/keamanan`) menyediakan ekspor/impor cadangan, snapshot dan reset. Maksimal berkas impor 2 MB. Impor mengganti progres setelah konfirmasi; tidak menggabungkan otomatis.
 - Migrasi otomatis membaca `edu_modules`, `edu_cards`, `edu_fills`, `edu_problems`, dan `edu_theme` jika kunci lama tersedia pada **origin yang sama**. Origin `file://`, localhost, dan domain Vercel berbeda; browser tidak memindahkan storage antar-origin otomatis.
 - Reset tidak memanggil `localStorage.clear()` dan tidak menghapus data aplikasi lain pada origin yang sama.
-- Perubahan dari tab lain disinkronkan melalui storage event. Penyuntingan serentak masih menggunakan perubahan terakhir; ini bukan kolaborasi realtime.
+- Perubahan dari tab lain disinkronkan melalui storage event. Konflik terdeteksi menjeda penyimpanan otomatis; localStorage bukan transaksi atomik dan bukan kolaborasi realtime.
 - Sesi ujian memakai `sessionStorage`, sehingga tidak ditujukan untuk sinkronisasi antarperangkat dan dapat hilang setelah sesi browser berakhir. Hasil terakhir disimpan bersama progres.
 - Progres tidak dikirim ke server. Tidak ada tracking atau analytics pihak ketiga.
 
@@ -151,13 +151,13 @@ Versi ini menggunakan ZIP `educode-hub.zip` pengguna sebagai dasar. Seluruh kate
 5. Setelah paket siap, putuskan koneksi lalu buka jobsheet, pencarian, atau latihan. Kunjungan pertama tetap membutuhkan internet. Aplikasi tidak bisa dipasang dari ZIP dengan membuka HTML langsung.
 6. Pembaruan tersedia melalui tombol **Gunakan versi baru** setelah unduhan lengkap. Halaman dimuat ulang setelah konfirmasi; jawaban variasi yang belum diperiksa akan hilang. Progres tersimpan tetap ada.
 
-`npm run build` menjalankan generator service worker sesudah Next.js selesai. Jangan menggantinya dengan `next build` langsung pada Vercel; gunakan build command `npm run build`. Worker memiliki versi dari BUILD_ID dan `Cache-Control: no-cache`. Cache hanya menyimpan sumber publik dari origin sendiri, tidak mencampur respons React Flight dengan HTML. Navigasi antarlaman memakai dokumen penuh saat service worker mengontrol halaman agar seluruh rute tetap dapat dipakai offline. Pencarian kini berjalan lokal terhadap materi dan dokumen yang dibundel.
+`npm run build` menjalankan generator service worker sesudah Next.js selesai. Jangan menggantinya dengan `next build` langsung pada Vercel; gunakan build command `npm run build`. Worker memiliki versi dari BUILD_ID dan `Cache-Control: no-cache`. Cache hanya menyimpan sumber publik dari origin sendiri, tidak mencampur respons React Flight dengan HTML. Navigasi online memakai router Next.js. Hanya saat browser melaporkan offline dan worker aktif, tautan internal memakai fallback dokumen cache. Pencarian kini berjalan lokal terhadap materi dan dokumen yang dibundel.
 
 Cache dapat dibuang oleh browser saat ruang penyimpanan menipis. Pembersihan data situs menghapus cache dan progres. Ekspor cadangan berkala. Tautan eksternal, layanan Vercel, serta proyek PHP/MySQL di luar portal memerlukan lingkungan masing-masing. PWA ini tidak menjalankan server Laravel secara offline.
 
 ### Latihan baru
 
-`/latihan-variasi` menyediakan 12 soal per paket: enam lengkapi kode dan enam perbaiki kode. Enam belas template menggunakan rotasi urutan dan parameter dinamis: angka harga, kuantitas, ID, dan konteks produk. Refresh atau tombol **Soal baru** menghasilkan paket berikutnya. Template dapat muncul kembali; ini bukan generator soal AI tanpa batas.
+`/latihan?tab=variasi` (redirect dari `/latihan-variasi`) menyediakan 12 soal per paket: enam lengkapi kode dan enam perbaiki kode. Enam belas template menggunakan rotasi urutan dan parameter dinamis: angka harga, kuantitas, ID, dan konteks produk. Refresh atau tombol **Soal baru** menghasilkan paket berikutnya. Template dapat muncul kembali; ini bukan generator soal AI tanpa batas.
 
 - Topik: subtotal, konversi angka, equality, query Eloquent, findOrFail, update, route resource, escaping Blade, format rupiah, dan validasi harga sesuai jobsheet.
 - Petunjuk, feedback langsung, filter jenis soal, dan pembahasan dengan mode belajar.
@@ -174,3 +174,10 @@ Menu **Pusat data** (`/keamanan`) menyediakan status penyimpanan, tiga snapshot 
 Impor/reset/pemulihan membuat salinan data aktif terlebih dahulu. Jika salinan gagal disimpan, penggantian dibatalkan. Data yang rusak tidak ditimpa otomatis dengan progres kosong. Saat kuota habis atau konflik tab terdeteksi, banner menyediakan ekspor perubahan di memori; lakukan ekspor sebelum berpindah halaman. Snapshot dan area pemulihan tetap tersimpan setelah reset progres agar dapat dipulihkan, tetapi ikut hilang jika data situs dihapus dari browser.
 
 Lihat `SECURITY.md` untuk perlindungan yang diterapkan, hasil audit dependensi, dan batas keamanan. Portal tetap berupa aplikasi belajar lokal tanpa akun atau backend multiuser. Tidak ada jaminan keamanan absolut.
+
+## Versi 2.3 — tema, navigasi, dan ruang belajar
+
+Tema terang/gelap/sistem diterapkan sebelum body melalui bootstrap dan disimpan terpisah pada educode:theme. Cadangan, reset, serta restore hanya mengubah data belajar. Latihan berada di /latihan dengan dua tab; URL lama tetap diarahkan. Ctrl/Cmd+K membuka menu perintah, halaman materi menyediakan skala teks dan mode fokus, dan Pusat data menjadi tempat tunggal pengelolaan cadangan.
+
+Laporan file, migrasi, hasil pengujian, dan keterbatasan: [AUDIT-2.3.md](AUDIT-2.3.md).
+

@@ -45,14 +45,15 @@ export default async function Page({
           __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
         }}
       />
-      <Link prefetch={false} className="back-link" href="/jobsheet">
+      <Link prefetch={undefined} className="back-link" href="/jobsheet">
         <ArrowLeft size={15} />
         Semua jobsheet
       </Link>
       <div className="lesson-layout">
         <article className="lesson-content">
           <div className="eyebrow">
-            MODUL {String(m.id).padStart(2, "0")} / 12 · {m.category}
+            MODUL {String(m.id).padStart(2, "0")} / {modules.length} ·{" "}
+            {m.category}
           </div>
           <h1>{m.title}</h1>
           <p className="lesson-lead">{m.summary}</p>
@@ -86,7 +87,7 @@ export default async function Page({
           <span className="eyebrow">KURIKULUM</span>
           {modules.map((mod) => (
             <Link
-              prefetch={false}
+              prefetch={undefined}
               className={mod.id === m.id ? "selected" : ""}
               key={mod.id}
               href={`/jobsheet/${mod.slug}`}

@@ -12,7 +12,7 @@ test("dashboard, responsive menu, theme and all public learning routes", async (
     path: "../../work/dashboard-desktop.png",
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Aktifkan tema gelap" }).click();
+  await page.getByLabel("Tema tampilan").selectOption("dark");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.screenshot({
     path: "../../work/dashboard-dark.png",
@@ -20,7 +20,7 @@ test("dashboard, responsive menu, theme and all public learning routes", async (
   });
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.getByRole("button", { name: "Aktifkan tema terang" }).click();
+  await page.getByLabel("Tema tampilan").selectOption("light");
   for (const route of [
     "/jobsheet",
     "/cheatsheet",
@@ -176,17 +176,17 @@ test("manual test requires evidence, reports export, invalid imports and reset s
   const dl = page.waitForEvent("download");
   await page.getByRole("button", { name: "Ekspor laporan" }).click();
   expect((await dl).suggestedFilename()).toBe("laporan-pengujian.md");
-  await page.goto("/progress");
+  await page.goto("/keamanan");
   await page.locator("input[type=file]").setInputFiles({
     name: "bad.json",
     mimeType: "application/json",
     buffer: Buffer.from('{"version":99}'),
   });
-  await expect(page.getByRole("alert")).toContainText("bukan cadangan");
+  await expect(page.getByRole("alert")).toContainText("Format cadangan");
   await page.evaluate(() =>
     localStorage.setItem("unrelated-data", "preserved"),
   );
-  await page.getByRole("button", { name: "Reset progres" }).click();
+  await page.getByRole("button", { name: "Reset Seluruh Data Belajar" }).click();
   await expect(
     page.getByRole("button", { name: "Hapus progres" }),
   ).toBeDisabled();
@@ -224,3 +224,4 @@ test("server rendered documents, metadata, sitemap, robots and 404", async ({
   expect(html).toContain("unsignedInteger");
   expect(html).toContain("application/ld+json");
 });
+

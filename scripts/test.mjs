@@ -5,6 +5,9 @@ import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 const sources = [
   "src/lib/content.ts",
+  "src/lib/theme.ts",
+  "src/lib/simulation.ts",
+  "tests/refactor.test.ts",
   "src/lib/progress.ts",
   "tests/progress.test.ts",
   "src/lib/practice.ts",
@@ -31,3 +34,5 @@ await import(pathToFileURL(resolve(".unit-tests/tests/practice.test.js")).href);
 await import(pathToFileURL(resolve("tests/service-worker.test.mjs")).href);
 
 await import(pathToFileURL(resolve(".unit-tests/tests/safety.test.js")).href);
+
+await import(pathToFileURL(resolve(".unit-tests/tests/refactor.test.js")).href);

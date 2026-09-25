@@ -16,7 +16,12 @@ import {
   STORAGE_KEY,
   type Progress,
 } from "@/lib/progress";
-import { guardedSave, parseBackup, replaceWithRecovery } from "@/lib/safety";
+import {
+  guardedSave,
+  parseBackup,
+  replaceWithRecovery,
+  serializeBackup,
+} from "@/lib/safety";
 import { useInteractions } from "./interaction-provider";
 type Kind =
   | "completedModules"
@@ -73,7 +78,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
             masteredFlashcards: read("edu_cards"),
             completedFills: read("edu_fills"),
             completedProblems: read("edu_problems"),
-            theme: localStorage.getItem("edu_theme"),
           }),
         );
       }
@@ -96,7 +100,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     loaded.current = true;
     setReady(true);
     const sync = (event: StorageEvent) => {
-      if (event.key !== STORAGE_KEY) return;
+      if (event.key !== STORAGE_KEY && event.key !== null) return;
       if (dirty.current) {
         setBlocked(true);
         setStorageStatus("conflict");
@@ -127,7 +131,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   }, [notify]);
   useEffect(() => {
     if (!ready) return;
-    document.documentElement.dataset.theme = progress.theme;
     if (blocked) return;
     try {
       lastSeen.current = guardedSave(localStorage, lastSeen.current, progress);
@@ -150,20 +153,17 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       pending.current.push(fn);
       return;
     }
-    if (loaded.current) {
-      dirty.current = true;
-      setProgress((p) => normalizeProgress(fn(p)));
-    }
+    dirty.current = true;
+    setProgress((p) => normalizeProgress(fn(p)));
   }, []);
   const complete = useCallback(
     (kind: Kind, id: number) => {
       if (!loaded.current) return;
-      dirty.current = true;
-      setProgress((p) =>
-        p[kind].includes(id)
-          ? p
-          : normalizeProgress({ ...p, [kind]: [...p[kind], id] }),
-      );
+      setProgress((p) => {
+        if (p[kind].includes(id)) return p;
+        dirty.current = true;
+        return normalizeProgress({ ...p, [kind]: [...p[kind], id] });
+      });
       notify("Progres belajar diperbarui.", "success");
     },
     [notify],
@@ -224,7 +224,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
             onClick={() =>
               download(
                 "educode-belum-tersimpan.json",
-                JSON.stringify(progress, null, 2),
+                serializeBackup(progress),
               )
             }
           >

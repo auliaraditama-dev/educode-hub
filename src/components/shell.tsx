@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import {
   ShieldCheck,
@@ -19,8 +19,6 @@ import {
   Folder,
   ChartNoAxesCombined,
   Library,
-  Sun,
-  Moon,
   Menu,
   X,
   Search,
@@ -28,6 +26,10 @@ import {
   Flame,
   ChevronRight,
 } from "lucide-react";
+import { useTheme } from "./theme-provider";
+import { CommandPalette } from "./command-palette";
+import { ReadingControls } from "./reading-controls";
+import { needsOfflineDocument } from "@/lib/navigation";
 import { useInteractions } from "./interaction-provider";
 import { PwaStatus } from "./pwa-provider";
 import { nav } from "@/lib/content";
@@ -49,11 +51,15 @@ const icons: Record<string, typeof House> = {
   chart: ChartNoAxesCombined,
   library: Library,
 };
+const navGroups: Record<string, string> = { "/jobsheet": "BELAJAR", "/simulasi": "SERKOM", "/catatan": "PRIBADI", "/referensi": "SUMBER", "/keamanan": "SISTEM" };
+const coreRoutes = new Set(["/", "/jobsheet", "/progress", "/flashcards", "/simulasi"]);
 export function Shell({ children }: { children: ReactNode }) {
   const path = usePathname(),
     [open, setOpen] = useState(false),
     [search, setSearch] = useState("");
-  const { progress, update } = useProgress();
+  const { progress } = useProgress();
+  const { theme, setTheme } = useTheme();
+  const router = useRouter();
   const { confirm } = useInteractions();
   const searchInput = useRef<HTMLInputElement>(null);
   const sidebar = useRef<HTMLElement>(null);
@@ -111,15 +117,6 @@ export function Shell({ children }: { children: ReactNode }) {
       });
     };
     const shortcuts = (event: KeyboardEvent) => {
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "k" &&
-        !document.querySelector("dialog[open]") &&
-        !document.querySelector(".sidebar.open")
-      ) {
-        event.preventDefault();
-        searchInput.current?.focus();
-      }
       if (event.key === "Escape") setOpen(false);
     };
     readScroll();
@@ -189,13 +186,9 @@ export function Shell({ children }: { children: ReactNode }) {
             const Icon = icons[n.icon];
             return (
               <div key={n.href}>
-                {n.href === "/simulasi" ? (
-                  <div className="workspace-label section-label">
-                    PERSIAPAN SERKOM
-                  </div>
-                ) : null}
+                {navGroups[n.href] && <div className="workspace-label section-label">{navGroups[n.href]}</div>}
                 <Link
-                  prefetch={false}
+                  prefetch={coreRoutes.has(n.href) ? undefined : false}
                   onClick={() => setOpen(false)}
                   href={n.href}
                   className={`nav-item ${active?.href === n.href ? "active" : ""}`}
@@ -203,9 +196,6 @@ export function Shell({ children }: { children: ReactNode }) {
                 >
                   <Icon size={18} />
                   <span>{n.label}</span>
-                  {n.href === "/simulasi" ? (
-                    <span className="new-label">BARU</span>
-                  ) : null}
                 </Link>
               </div>
             );
@@ -222,14 +212,16 @@ export function Shell({ children }: { children: ReactNode }) {
           </Link>
         </div>
         <div className="profile">
-          <span className="avatar">JD</span>
+          <span className="avatar" aria-hidden="true">
+            <BookOpen size={20} />
+          </span>
           <div>
+            <small>LEVEL BELAJAR</small>
             <strong>{level.title}</strong>
             <small>
               Level {level.level} · {xp} XP
             </small>
           </div>
-          <span className="profile-dot" />
         </div>
       </aside>
       <div className="app-body" inert={mobile && open}>
@@ -250,11 +242,23 @@ export function Shell({ children }: { children: ReactNode }) {
             <strong>{active?.label || "Materi belajar"}</strong>
           </div>
           <div className="top-actions">
-            <form className="global-search" action="/cari" method="get">
+            <PwaStatus />
+            <CommandPalette />
+            <form
+              className="global-search"
+              action="/cari"
+              method="get"
+              onSubmit={(event) => {
+                if (needsOfflineDocument()) return;
+                event.preventDefault();
+                router.push(`/cari?q=${encodeURIComponent(search.trim())}`);
+              }}
+            >
               <Search size={17} />
               <input
                 ref={searchInput}
                 name="q"
+                maxLength={200}
                 aria-label="Cari materi"
                 placeholder="Cari materi belajar..."
                 value={search}
@@ -269,11 +273,11 @@ export function Shell({ children }: { children: ReactNode }) {
                 void confirm({
                   title: "Belajar dengan alur yang jelas",
                   description:
-                    "Progres disimpan otomatis pada browser ini. Cadangkan melalui halaman Progres belajar.",
+                    "Progres disimpan otomatis pada browser ini. Cadangkan melalui Pusat data.",
                   alert: true,
                   accept: "Mengerti",
                   details: [
-                    "Ctrl / ⌘ + K: langsung cari materi.",
+                    "Ctrl / ⌘ + K: buka menu perintah dan pencarian.",
                     "Enter: periksa jawaban latihan sintaks.",
                     "Escape: tutup dialog atau menu.",
                     "Praktikkan checkpoint jobsheet sebelum menandai modul selesai.",
@@ -289,30 +293,25 @@ export function Shell({ children }: { children: ReactNode }) {
               <strong>{xp}</strong>
               <span>XP</span>
             </div>
-            <button
-              className="icon-button theme-toggle"
-              aria-label={
-                progress.theme === "light"
-                  ? "Aktifkan tema gelap"
-                  : "Aktifkan tema terang"
-              }
-              onClick={() =>
-                update((p) => ({
-                  ...p,
-                  theme: p.theme === "light" ? "dark" : "light",
-                }))
-              }
-            >
-              {progress.theme === "light" ? (
-                <Moon size={19} />
-              ) : (
-                <Sun size={19} />
-              )}
-            </button>
+            <label className="theme-picker">
+              <span className="sr-only">Tema tampilan</span>
+              <select
+                aria-label="Tema tampilan"
+                value={theme}
+                onChange={(e) =>
+                  setTheme(e.target.value as "light" | "dark" | "system")
+                }
+              >
+                <option value="light">Terang</option>
+                <option value="dark">Gelap</option>
+                <option value="system">Sistem</option>
+              </select>
+            </label>
           </div>
         </header>
-        <PwaStatus />
         <main id="main" tabIndex={-1}>
+          {(path.startsWith("/jobsheet/") ||
+            path.startsWith("/referensi/")) && <ReadingControls />}
           {children}
         </main>
         <footer className="footer">

@@ -6,7 +6,7 @@ const origin = "https://educode.test";
 const urls = [
   "/",
   "/cari",
-  "/latihan-variasi",
+  "/latihan",
   "/runner",
   "/offline.html",
   "/_next/static/app.js",
@@ -100,7 +100,7 @@ test("offline install is complete and serves unvisited pages, query search and r
   await h.dispatch("activate");
   assert.equal(h.claimed(), true);
   h.setOffline();
-  for (const path of ["/", "/latihan-variasi", "/cari?q=harga", "/runner"]) {
+  for (const path of ["/", "/latihan", "/cari?q=harga", "/runner"]) {
     const response = await h.dispatch("fetch", {
       request: {
         method: "GET",

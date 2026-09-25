@@ -44,7 +44,6 @@ test("valid backup round-trips including independent exercise families", () => {
     completedFills: [2, 8],
     completedProblems: [2, 4],
     notes: { "1": "Refleksi" },
-    theme: "dark" as const,
   };
   assert.deepEqual(normalizeProgress(JSON.parse(JSON.stringify(p))), p);
 });

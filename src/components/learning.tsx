@@ -38,12 +38,13 @@ export function Jobsheets() {
       <PageHeading
         eyebrow="LEARNING PATH"
         title="Belajar dari awal. Paham sampai akhir."
-        description="12 modul terarah untuk membangun proyek Laravel 12 Kopi Ulee Kareng."
+        description={`${modules.length} modul terarah untuk membangun proyek Laravel 12 Kopi Ulee Kareng.`}
       />
       <div className="filter-row">
         <div className="tabs">
           {["Semua", "Fondasi", "Implementasi", "Verifikasi"].map((c) => (
             <button
+              aria-pressed={category === c}
               className={category === c ? "selected" : ""}
               key={c}
               onClick={() => setCategory(c)}
@@ -65,7 +66,6 @@ export function Jobsheets() {
       <div className="module-grid">
         {filtered.map((m) => (
           <Link
-            prefetch={false}
             key={m.id}
             href={`/jobsheet/${m.slug}`}
             className="module-card"
@@ -292,7 +292,7 @@ export function Flashcards() {
       <PageHeading
         eyebrow="ACTIVE RECALL"
         title="Pahami. Ingat. Ulangi."
-        description="20 kartu konsep Laravel dan pertanyaan lisan untuk melatih pemahaman."
+        description={`${flashcards.length} kartu konsep Laravel dan pertanyaan lisan untuk melatih pemahaman.`}
       />
       <div className="study-width">
         <div className="filter-row">
@@ -421,14 +421,6 @@ export function FillCode() {
         title="Satu bagian kecil. Satu pemahaman baru."
         description="Lengkapi sintaks yang hilang. Setiap latihan memberikan 20 XP satu kali."
       />
-      <Link
-        prefetch={false}
-        className="panel practice-promo"
-        href="/latihan-variasi"
-      >
-        <strong>Butuh soal yang selalu berganti?</strong>
-        <span>Coba 12 soal variasi sintaks & perbaikan kode →</span>
-      </Link>
       <div className="panel practice-toolbar">
         <div className="practice-progress">
           <strong>

@@ -22,9 +22,16 @@ export default function Dashboard() {
   const { progress } = useProgress();
   const done = progress.completedModules.length;
   const next =
+    modules.find(
+      (m) =>
+        m.id === progress.lastModule &&
+        !progress.completedModules.includes(m.id),
+    ) ||
     modules.find((m) => !progress.completedModules.includes(m.id)) ||
     modules[0];
-  const percent = Math.round((done / modules.length) * 100);
+  const percent = modules.length
+    ? Math.round((done / modules.length) * 100)
+    : 0;
   return (
     <>
       <div className="dashboard-heading">
@@ -64,7 +71,7 @@ export default function Dashboard() {
             <div className="continue-meta">
               <span>
                 <BookOpen size={15} />
-                12 modul terarah
+                {modules.length} modul terarah
               </span>
               <span>
                 <Clock size={15} />
@@ -72,12 +79,12 @@ export default function Dashboard() {
               </span>
             </div>
             <Link
-              prefetch={false}
+              prefetch={undefined}
               className="button primary"
               href={`/jobsheet/${next.slug}`}
             >
               <Play size={15} fill="currentColor" />{" "}
-              {done ? "Lanjutkan belajar" : "Mulai belajar"}
+              {done === modules.length ? "Review materi" : "Lanjutkan belajar"}
               <ArrowRight size={17} />
             </Link>
           </div>
@@ -157,11 +164,11 @@ export default function Dashboard() {
           </div>
           <Meter value={percent} label="Modul selesai" />
           <p className="goal-note">
-            {done === 12
+            {done === modules.length
               ? "Semua modul ditandai selesai. Periksa bukti praktikmu."
               : `${modules.length - done} modul lagi dalam perjalananmu.`}
           </p>
-          <Link prefetch={false} href="/progress">
+          <Link prefetch={undefined} href="/progress">
             Lihat progres lengkap <ArrowUpRight size={16} />
           </Link>
         </section>
@@ -171,7 +178,7 @@ export default function Dashboard() {
           {
             label: "Modul selesai",
             value: `${done}`,
-            of: "/ 12",
+            of: `/ ${modules.length}`,
             icon: BookOpen,
             color: "orange",
             caption: "Bangun fondasi yang kuat",
@@ -223,14 +230,14 @@ export default function Dashboard() {
               <h2>Learning path kamu</h2>
               <p>Langkah terarah dari fondasi hingga verifikasi.</p>
             </div>
-            <Link prefetch={false} href="/jobsheet">
+            <Link prefetch={undefined} href="/jobsheet">
               Semua modul <ArrowRight size={15} />
             </Link>
           </div>
           <div className="path-list">
             {modules.slice(0, 4).map((m, i) => (
               <Link
-                prefetch={false}
+                prefetch={undefined}
                 href={`/jobsheet/${m.slug}`}
                 className="path-item"
                 key={m.id}
@@ -267,7 +274,7 @@ export default function Dashboard() {
           <div className="source-note">
             <BookOpen size={17} />
             <span>Disusun dari jobsheet & rangkuman persiapan SERKOM RPL.</span>
-            <Link prefetch={false} href="/referensi">
+            <Link prefetch={undefined} href="/referensi">
               Lihat sumber
             </Link>
           </div>
@@ -279,7 +286,11 @@ export default function Dashboard() {
               <p>Pilih cara belajar yang cocok untukmu.</p>
             </div>
           </div>
-          <Link prefetch={false} href="/flashcards" className="practice-card">
+          <Link
+            prefetch={undefined}
+            href="/flashcards"
+            className="practice-card"
+          >
             <span className="icon-tile soft-violet">
               <Layers size={21} />
             </span>
@@ -287,12 +298,16 @@ export default function Dashboard() {
               <h3>Flashcards</h3>
               <p>Ulangi konsep, kuatkan ingatan.</p>
               <span>
-                20 kartu konsep <span>·</span> 5–10 menit
+                {flashcards.length} kartu konsep <span>·</span> 5–10 menit
               </span>
             </div>
             <ArrowUpRight size={18} />
           </Link>
-          <Link prefetch={false} href="/tantangan" className="practice-card">
+          <Link
+            prefetch={undefined}
+            href="/tantangan"
+            className="practice-card"
+          >
             <span className="icon-tile soft-blue">
               <Terminal size={21} />
             </span>
@@ -300,12 +315,12 @@ export default function Dashboard() {
               <h3>Tantangan kode</h3>
               <p>Asah logika dengan test case nyata.</p>
               <span>
-                4 tantangan <span>·</span> JavaScript
+                {problems.length} tantangan <span>·</span> JavaScript
               </span>
             </div>
             <ArrowUpRight size={18} />
           </Link>
-          <Link prefetch={false} href="/simulasi" className="exam-card">
+          <Link prefetch={undefined} href="/simulasi" className="exam-card">
             <div>
               <span className="tiny-label">SIAP UJI PEMAHAMAN?</span>
               <h3>Coba simulasi ujian</h3>

@@ -9,8 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     scope: "/",
     display: "standalone",
-    background_color: "#f7f8fa",
-    theme_color: "#ed683c",
+    background_color: "#141923",
+    theme_color: "#141923",
     lang: "id",
     icons: [
       {
@@ -35,7 +35,7 @@ export default function manifest(): MetadataRoute.Manifest {
     shortcuts: [
       {
         name: "Latihan variasi",
-        url: "/latihan-variasi",
+        url: "/latihan?tab=variasi",
         description: "Paket sintaks dan perbaikan kode baru",
       },
       { name: "Jobsheet Laravel", url: "/jobsheet" },

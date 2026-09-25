@@ -6,6 +6,10 @@ const paths = [
   "/cheatsheet",
   "/flashcards",
   "/fillcode",
+  "/latihan",
+  "/latihan-variasi",
+  "/keamanan",
+  "/offline",
   "/tantangan",
   "/simulasi",
   "/pengujian",
@@ -45,4 +49,4 @@ for (const path of paths) {
   console.log(`PASS ${path}`);
 }
 assert.equal((await fetch(base + "/halaman-tidak-ada")).status, 404);
-console.log("PASS 404; all 20 HTTP checks passed");
+console.log(`PASS 404; all ${paths.length + 1} HTTP checks passed`);

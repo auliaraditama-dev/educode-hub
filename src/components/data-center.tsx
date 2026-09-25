@@ -1,14 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { Download, ShieldCheck, History } from "lucide-react";
+import { Download, ShieldCheck, History, Upload, Trash2 } from "lucide-react";
 import { useProgress } from "./progress-provider";
 import { useInteractions } from "./interaction-provider";
 import { usePwa } from "./pwa-provider";
 import { PageHeading } from "./ui";
-import { download, STORAGE_KEY, xpOf } from "@/lib/progress";
+import { download, STORAGE_KEY, xpOf, emptyProgress } from "@/lib/progress";
 import {
   readSnapshots,
+  parseBackup,
+  serializeBackup,
   saveSnapshot,
   QUARANTINE_KEY,
   type Snapshot,
@@ -18,6 +20,8 @@ export function DataCenter() {
     useProgress();
   const { confirm } = useInteractions();
   const pwa = usePwa();
+  const file = useRef<HTMLInputElement>(null);
+  const [estimate, setEstimate] = useState<StorageEstimate | null>(null);
   const [snapshots, setSnapshots] = useState<Snapshot[]>([]),
     [secure, setSecure] = useState(false);
   const refresh = () => {
@@ -29,6 +33,11 @@ export function DataCenter() {
   };
   useEffect(() => {
     setSecure(window.isSecureContext);
+    if (navigator.storage?.estimate)
+      void navigator.storage
+        .estimate()
+        .then(setEstimate)
+        .catch(() => {});
     try {
       setSnapshots(readSnapshots(localStorage));
     } catch {}
@@ -74,6 +83,22 @@ export function DataCenter() {
               KB
             </dd>
           </div>
+          <div>
+            <dt>Penyimpanan situs (perkiraan)</dt>
+            <dd>
+              {estimate
+                ? `${Math.round((estimate.usage || 0) / 1024 / 1024)} MB / ${Math.round((estimate.quota || 0) / 1024 / 1024)} MB kuota`
+                : "Tidak tersedia pada browser ini"}
+            </dd>
+          </div>
+          <div>
+            <dt>Paket terakhir dibangun</dt>
+            <dd>
+              {pwa.builtAt
+                ? new Date(pwa.builtAt).toLocaleString("id-ID")
+                : "Belum tersedia"}
+            </dd>
+          </div>
         </dl>
         <div className="button-row">
           <button
@@ -82,7 +107,7 @@ export function DataCenter() {
             onClick={() =>
               download(
                 `educode-cadangan-${new Date().toISOString().slice(0, 10)}.json`,
-                JSON.stringify(progress, null, 2),
+                serializeBackup(progress),
               )
             }
           >
@@ -107,6 +132,100 @@ export function DataCenter() {
             <History size={16} /> Buat snapshot
           </button>
         </div>
+      </section>
+      <section className="panel data-panel" id="backup">
+        <h2>Data belajar milikmu</h2>
+        <p>
+          Progres, catatan, dan draft kode tersimpan di browser/perangkat ini.
+          Tidak ada akun atau sinkronisasi cloud. Ekspor sebelum berganti
+          perangkat atau membersihkan browser.
+        </p>
+        <div className="button-row">
+          <button
+            className="button secondary"
+            onClick={() => file.current?.click()}
+          >
+            <Upload size={16} />
+            Impor cadangan
+          </button>
+          <button
+            className="button danger"
+            onClick={async () => {
+              if (
+                await confirm({
+                  title: "Reset seluruh progres?",
+                  description:
+                    "Catatan, hasil uji, draft kode, dan progres pada perangkat ini akan dihapus. Ekspor cadangan terlebih dahulu; snapshot pemulihan dibuat sebelum penggantian data.",
+                  tone: "danger",
+                  requireText: "RESET",
+                  accept: "Hapus progres",
+                })
+              ) {
+                if (!replace(emptyProgress(), "Sebelum reset progres")) return;
+                try {
+                  [
+                    "edu_modules",
+                    "edu_cards",
+                    "edu_fills",
+                    "edu_problems",
+                    "edu_xp",
+                    "educode:exam",
+                  ].forEach((k) => localStorage.removeItem(k));
+                  sessionStorage.removeItem("educode:exam");
+                  sessionStorage.removeItem("educode:exam:v2");
+                } catch {}
+                refresh();
+                notify(
+                  "Data belajar direset. Tema tetap dipertahankan.",
+                  "success",
+                );
+              }
+            }}
+          >
+            <Trash2 size={16} />
+            Reset Seluruh Data Belajar
+          </button>
+        </div>
+        <input
+          ref={file}
+          hidden
+          type="file"
+          accept=".json,application/json"
+          onChange={async (e) => {
+            const selected = e.target.files?.[0];
+            e.target.value = "";
+            if (!selected) return;
+            if (selected.size > 2000000) {
+              notify("Ukuran cadangan maksimal 2 MB.", "danger");
+              return;
+            }
+            try {
+              const imported = parseBackup(await selected.text());
+              if (
+                await confirm({
+                  title: "Impor cadangan belajar?",
+                  description:
+                    "Cadangan akan mengganti progres, tanpa mengubah tema. Snapshot data sebelumnya dibuat otomatis. Ekspor perubahan yang belum tersimpan terlebih dahulu.",
+                  accept: "Ganti dengan cadangan",
+                  details: [
+                    selected.name,
+                    `${imported.completedModules.length} modul selesai · ${xpOf(imported)} XP`,
+                    `${Object.keys(imported.notes).length} catatan · ${imported.completedFills.length} latihan sintaks selesai`,
+                  ],
+                })
+              ) {
+                if (!replace(imported, "Sebelum impor cadangan")) return;
+                refresh();
+                notify("Cadangan berhasil diimpor.", "success");
+              }
+            } catch {
+              notify(
+                "Format cadangan tidak valid. Gunakan ekspor EduCode Hub atau cadangan v2 lama.",
+                "danger",
+              );
+            }
+          }}
+        />
       </section>
       <section className="panel offline-panel">
         <h2>Riwayat pemulihan</h2>
@@ -135,7 +254,7 @@ export function DataCenter() {
                     onClick={() =>
                       download(
                         `educode-snapshot-${snapshot.id}.json`,
-                        JSON.stringify(snapshot.data, null, 2),
+                        serializeBackup(snapshot.data),
                       )
                     }
                   >
@@ -216,8 +335,8 @@ export function DataCenter() {
               Baca ulang penyimpanan
             </button>
           </div>
-          <Link prefetch={false} className="text-link" href="/progress">
-            Impor cadangan dari berkas →
+          <Link prefetch={false} className="text-link" href="#backup">
+            Buka impor cadangan →
           </Link>
         </section>
         <section className="panel">

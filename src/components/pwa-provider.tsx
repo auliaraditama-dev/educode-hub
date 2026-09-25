@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { Download, WifiOff, RefreshCw, CheckCircle2 } from "lucide-react";
 import { useInteractions } from "./interaction-provider";
+import { needsOfflineDocument } from "@/lib/navigation";
 import { PageHeading } from "./ui";
 type InstallEvent = Event & {
   prompt: () => Promise<void>;
@@ -23,6 +24,7 @@ type State = {
   status: string;
   version: string;
   count: number;
+  builtAt: string;
   waiting: boolean;
   install: () => Promise<void>;
   update: () => Promise<void>;
@@ -36,6 +38,7 @@ const Context = createContext<State>({
   status: "Menyiapkan aplikasi…",
   version: "",
   count: 0,
+  builtAt: "",
   waiting: false,
   install: async () => {},
   update: async () => {},
@@ -50,7 +53,8 @@ export function PwaProvider({ children }: { children: ReactNode }) {
     [waiting, setWaiting] = useState(false),
     [status, setStatus] = useState("Menyiapkan paket offline…"),
     [version, setVersion] = useState(""),
-    [count, setCount] = useState(0);
+    [count, setCount] = useState(0),
+    [builtAt, setBuiltAt] = useState("");
   const deferred = useRef<InstallEvent | null>(null),
     registration = useRef<ServiceWorkerRegistration | null>(null),
     reloadAfterUpdate = useRef(false);
@@ -84,7 +88,7 @@ export function PwaProvider({ children }: { children: ReactNode }) {
     window.addEventListener("offline", connection);
     window.addEventListener("beforeinstallprompt", beforeInstall);
     window.addEventListener("appinstalled", didInstall);
-    // Full-document navigation keeps offline pages independent of Next flight cache keys.
+    // Only known offline links need a document fallback; online clicks belong to Next.
     const navigate = (event: MouseEvent) => {
       if (
         event.defaultPrevented ||
@@ -93,7 +97,7 @@ export function PwaProvider({ children }: { children: ReactNode }) {
         event.metaKey ||
         event.shiftKey ||
         event.altKey ||
-        !navigator.serviceWorker?.controller
+        !needsOfflineDocument()
       )
         return;
       const anchor = (event.target as Element)?.closest?.(
@@ -133,6 +137,9 @@ export function PwaProvider({ children }: { children: ReactNode }) {
         setReady(Boolean(event.data.ready));
         setVersion(String(event.data.version));
         setCount(Number(event.data.count));
+        setBuiltAt(
+          typeof event.data.builtAt === "string" ? event.data.builtAt : "",
+        );
         setStatus(
           event.data.ready
             ? "Paket lengkap tersimpan. Materi dan latihan siap dibuka offline."
@@ -210,7 +217,7 @@ export function PwaProvider({ children }: { children: ReactNode }) {
         controlled,
       );
     };
-  }, []);
+  }, [notify]);
   const install = async () => {
     if (!deferred.current) {
       notify(
@@ -272,6 +279,7 @@ export function PwaProvider({ children }: { children: ReactNode }) {
         status,
         version,
         count,
+        builtAt,
         waiting,
         install,
         update,
@@ -361,7 +369,7 @@ export function OfflinePage() {
           <Link
             prefetch={false}
             className="button secondary"
-            href="/latihan-variasi"
+            href="/latihan?tab=variasi"
           >
             Buka latihan variasi
           </Link>
@@ -386,7 +394,7 @@ export function OfflinePage() {
               Menghapus data situs juga menghapus progres dan paket offline.
             </li>
           </ul>
-          <Link prefetch={false} href="/progress" className="text-link">
+          <Link prefetch={false} href="/keamanan" className="text-link">
             Cadangkan progres belajar →
           </Link>
         </section>

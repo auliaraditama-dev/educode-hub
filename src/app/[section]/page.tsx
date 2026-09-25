@@ -4,7 +4,6 @@ import {
   Jobsheets,
   Cheatsheet,
   Flashcards,
-  FillCode,
   Challenges,
 } from "@/components/learning";
 import {
@@ -12,10 +11,12 @@ import {
   Testing,
   Portfolio,
   ProgressPage,
-  Exam,
   References,
 } from "@/components/workbench";
-import { PracticeLab } from "@/components/practice-lab";
+import { Suspense } from "react";
+import { PracticeHub } from "@/components/practice-hub";
+import { Exam } from "@/components/exam";
+import { modules, flashcards } from "@/lib/content";
 import { OfflinePage } from "@/components/pwa-provider";
 import { DataCenter } from "@/components/data-center";
 const pages = {
@@ -24,10 +25,10 @@ const pages = {
     desc: "Snapshot, pencadangan, status penyimpanan, dan pemulihan progres lokal.",
     Component: DataCenter,
   },
-  "latihan-variasi": {
+  latihan: {
     title: "Latihan Variasi & Perbaikan Kode",
     desc: "Paket soal Laravel, PHP, Blade, dan JavaScript berganti saat refresh dan tersedia offline.",
-    Component: PracticeLab,
+    Component: PracticeHub,
   },
   offline: {
     title: "PWA & Belajar Offline",
@@ -36,7 +37,7 @@ const pages = {
   },
   jobsheet: {
     title: "Jobsheet Laravel 12",
-    desc: "12 modul praktik Laravel 12 dari kebutuhan hingga pengujian dan dokumentasi.",
+    desc: `${modules.length} modul praktik Laravel 12 dari kebutuhan hingga pengujian dan dokumentasi.`,
     Component: Jobsheets,
   },
   cheatsheet: {
@@ -46,13 +47,8 @@ const pages = {
   },
   flashcards: {
     title: "Flashcards Laravel",
-    desc: "20 kartu konsep untuk mengulang materi dan pertanyaan lisan SERKOM.",
+    desc: `${flashcards.length} kartu konsep untuk mengulang materi dan pertanyaan lisan SERKOM.`,
     Component: Flashcards,
-  },
-  fillcode: {
-    title: "Latihan Lengkapi Kode",
-    desc: "Latihan sintaks Laravel dan Blade dengan umpan balik langsung.",
-    Component: FillCode,
   },
   tantangan: {
     title: "Tantangan Kode",
@@ -121,5 +117,9 @@ export default async function Page({
   const p = pages[section as Key];
   if (!Object.hasOwn(pages, section)) notFound();
   const Component = p.Component;
-  return <Component />;
+  return (
+    <Suspense fallback={<p role="status">Memuat materi…</p>}>
+      <Component />
+    </Suspense>
+  );
 }

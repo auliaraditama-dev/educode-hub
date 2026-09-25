@@ -1,16 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect, useCallback, useRef } from "react";
-import {
-  Download,
-  Upload,
-  Trash2,
-  Bookmark,
-  Check,
-  Clock,
-  Play,
-  FileText,
-} from "lucide-react";
+import { useState } from "react";
+import { Download, Bookmark, FileText } from "lucide-react";
 import {
   modules,
   flashcards,
@@ -19,17 +10,9 @@ import {
   testCases,
   portfolioItems,
 } from "@/lib/content";
-import { parseBackup } from "@/lib/safety";
-import { useInteractions } from "./interaction-provider";
 import { useProgress } from "./progress-provider";
 import { PageHeading, Meter } from "./ui";
-import {
-  download,
-  emptyProgress,
-  xpOf,
-  levelOf,
-  type Progress,
-} from "@/lib/progress";
+import { download, xpOf, levelOf, type Progress } from "@/lib/progress";
 export function Notes() {
   const { progress, update } = useProgress();
   const [filter, setFilter] = useState("Semua");
@@ -45,11 +28,12 @@ export function Notes() {
       <PageHeading
         eyebrow="RUANG PRIBADI"
         title="Simpan yang penting. Tulis yang dipahami."
-        description="Catatan dan bookmark disimpan di browser ini. Ekspor cadangan melalui halaman progres."
+        description="Catatan dan bookmark disimpan di browser ini. Ekspor cadangan melalui Pusat data."
       />
       <div className="tabs">
         {["Semua", "Bookmark", "Ada catatan"].map((f) => (
           <button
+            aria-pressed={filter === f}
             className={filter === f ? "selected" : ""}
             onClick={() => setFilter(f)}
             key={f}
@@ -137,8 +121,8 @@ export function Testing() {
         </button>
       </PageHeading>
       <div className="info">
-        {passed} dari 10 skenario ditandai lulus. Status ini adalah catatan
-        mandiri, bukan hasil pengujian otomatis portal.
+        {passed} dari {testCases.length} skenario ditandai lulus. Status ini
+        adalah catatan mandiri, bukan hasil pengujian otomatis portal.
       </div>
       <div className="test-list">
         {testCases.map(([id, step, data, expected]) => {
@@ -339,9 +323,7 @@ export function Portfolio() {
   );
 }
 export function ProgressPage() {
-  const { confirm } = useInteractions();
-  const { progress, replace, notify } = useProgress();
-  const file = useRef<HTMLInputElement>(null);
+  const { progress } = useProgress();
   const xp = xpOf(progress),
     level = levelOf(xp);
   const sections = [
@@ -380,8 +362,11 @@ export function ProgressPage() {
                 {count}/{total}
               </strong>
             </div>
-            <Meter value={Math.round((count / total) * 100)} label={name} />
-            <p>{Math.round((count / total) * 100)}% selesai</p>
+            <Meter
+              value={total ? Math.round((count / total) * 100) : 0}
+              label={name}
+            />
+            <p>{total ? Math.round((count / total) * 100) : 0}% selesai</p>
           </section>
         ))}
       </div>
@@ -391,7 +376,11 @@ export function ProgressPage() {
           {progress.practice.correct} jawaban benar dari{" "}
           {progress.practice.attempts} pemeriksaan. Tidak menambah XP dasar.
         </p>
-        <Link prefetch={false} href="/latihan-variasi" className="text-link">
+        <Link
+          prefetch={false}
+          href="/latihan?tab=variasi"
+          className="text-link"
+        >
           Buka paket latihan baru →
         </Link>
       </section>
@@ -404,345 +393,9 @@ export function ProgressPage() {
           </p>
         </section>
       ) : null}
-      <section className="panel data-panel">
-        <h2>Data belajar milikmu</h2>
-        <p>
-          Progres, catatan, dan draft kode tersimpan di browser/perangkat ini.
-          Tidak ada akun atau sinkronisasi cloud. Ekspor sebelum berganti
-          perangkat atau membersihkan browser.
-        </p>
-        <div className="button-row">
-          <button
-            className="button primary"
-            onClick={() =>
-              download(
-                "educode-progress.json",
-                JSON.stringify(progress, null, 2),
-              )
-            }
-          >
-            <Download size={16} />
-            Ekspor cadangan
-          </button>
-          <button
-            className="button secondary"
-            onClick={() => file.current?.click()}
-          >
-            <Upload size={16} />
-            Impor cadangan
-          </button>
-          <button
-            className="button danger"
-            onClick={async () => {
-              if (
-                await confirm({
-                  title: "Reset seluruh progres?",
-                  description:
-                    "Catatan, hasil uji, draft kode, dan progres pada perangkat ini akan dihapus. Ekspor cadangan terlebih dahulu; snapshot pemulihan dibuat sebelum penggantian data.",
-                  tone: "danger",
-                  requireText: "RESET",
-                  accept: "Hapus progres",
-                })
-              ) {
-                if (!replace(emptyProgress(), "Sebelum reset progres")) return;
-                try {
-                  [
-                    "edu_modules",
-                    "edu_cards",
-                    "edu_fills",
-                    "edu_problems",
-                    "edu_xp",
-                    "edu_theme",
-                    "educode:exam",
-                  ].forEach((k) => localStorage.removeItem(k));
-                  sessionStorage.removeItem("educode:exam");
-                } catch {}
-                notify("Data EduCode sudah direset.", "success");
-              }
-            }}
-          >
-            <Trash2 size={16} />
-            Reset progres
-          </button>
-        </div>
-        <input
-          ref={file}
-          hidden
-          type="file"
-          accept=".json,application/json"
-          onChange={async (e) => {
-            const selected = e.target.files?.[0];
-            e.target.value = "";
-            if (!selected) return;
-            if (selected.size > 2000000) {
-              notify("Ukuran cadangan maksimal 2 MB.", "danger");
-              return;
-            }
-            try {
-              const imported = parseBackup(await selected.text());
-              if (
-                await confirm({
-                  title: "Impor cadangan belajar?",
-                  description:
-                    "Cadangan ini akan mengganti progres saat ini. Ekspor data sekarang jika ingin menyimpannya.",
-                  accept: "Ganti dengan cadangan",
-                  details: [
-                    selected.name,
-                    `${imported.completedModules.length} modul selesai · ${xpOf(imported)} XP`,
-                    `${Object.keys(imported.notes).length} catatan · ${imported.completedFills.length} latihan sintaks selesai`,
-                  ],
-                })
-              ) {
-                if (!replace(imported, "Sebelum impor cadangan")) return;
-                notify("Cadangan berhasil diimpor.", "success");
-              }
-            } catch {
-              notify(
-                "File bukan cadangan EduCode versi 2 yang valid.",
-                "danger",
-              );
-            }
-          }}
-        />
-      </section>
-    </>
-  );
-}
-const quiz = flashcards.slice(0, 10).map((f, i) => {
-  const wrong = [
-    flashcards[(i + 5) % 20].a,
-    flashcards[(i + 10) % 20].a,
-    flashcards[(i + 15) % 20].a,
-  ];
-  const options = [...wrong];
-  options.splice(i % 4, 0, f.a);
-  return { ...f, options, correct: i % 4 };
-});
-type ExamState = {
-  deadline: number;
-  answers: Record<number, number>;
-  finished: boolean;
-};
-export function Exam() {
-  const { confirm } = useInteractions();
-  const { update } = useProgress();
-  const [session, setSession] = useState<ExamState | null>(null),
-    [minutes, setMinutes] = useState(20),
-    [remaining, setRemaining] = useState(0),
-    [loaded, setLoaded] = useState(false);
-  const sessionRef = useRef(session);
-  useEffect(() => {
-    sessionRef.current = session;
-  }, [session]);
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(
-        sessionStorage.getItem("educode:exam") || "null",
-      );
-      if (
-        saved &&
-        typeof saved.deadline === "number" &&
-        typeof saved.finished === "boolean" &&
-        saved.answers &&
-        typeof saved.answers === "object" &&
-        !Array.isArray(saved.answers)
-      ) {
-        const answers = Object.fromEntries(
-          Object.entries(saved.answers).filter(
-            ([k, v]) =>
-              Number(k) >= 0 &&
-              Number(k) < 10 &&
-              Number.isInteger(v) &&
-              Number(v) >= 0 &&
-              Number(v) < 4,
-          ),
-        );
-        setSession({
-          deadline: saved.deadline,
-          finished: saved.finished,
-          answers: answers as Record<number, number>,
-        });
-      }
-    } catch {}
-    setLoaded(true);
-  }, []);
-  const finish = useCallback(() => {
-    const current = sessionRef.current;
-    if (!current || current.finished) return;
-    const score = quiz.reduce(
-      (n, q, i) => n + (current.answers[i] === q.correct ? 1 : 0),
-      0,
-    );
-    setSession({ ...current, finished: true });
-    update((p) => ({
-      ...p,
-      exam: { score, total: quiz.length, date: new Date().toISOString() },
-    }));
-  }, [update]);
-  useEffect(() => {
-    if (!loaded) return;
-    try {
-      if (session)
-        sessionStorage.setItem("educode:exam", JSON.stringify(session));
-      else sessionStorage.removeItem("educode:exam");
-    } catch {}
-  }, [session, loaded]);
-  useEffect(() => {
-    if (!session || session.finished) return;
-    const tick = () => {
-      const left = Math.max(
-        0,
-        Math.ceil((session.deadline - Date.now()) / 1000),
-      );
-      setRemaining(left);
-      if (left === 0) finish();
-    };
-    tick();
-    const t = setInterval(tick, 1000);
-    return () => clearInterval(t);
-  }, [session, finish]);
-  const score = session
-    ? quiz.reduce(
-        (n, q, i) => n + (session.answers[i] === q.correct ? 1 : 0),
-        0,
-      )
-    : 0;
-  return (
-    <>
-      <PageHeading
-        eyebrow="SIMULASI PENGETAHUAN"
-        title="Ukur pemahaman, temukan fokus latihan."
-        description="10 soal pilihan ganda berdasarkan materi. Ini latihan pengetahuan, bukan asesmen resmi LSP."
-      />
-      {!session ? (
-        <section className="panel exam-intro">
-          <Clock size={44} />
-          <h2>Siapkan waktu untuk fokus.</h2>
-          <p>
-            Jawaban disimpan selama sesi browser. Waktu terus berjalan saat
-            berpindah halaman. Saat waktu habis, jawaban dikumpulkan otomatis.
-          </p>
-          <label>
-            Durasi latihan
-            <select
-              value={minutes}
-              onChange={(e) => setMinutes(Number(e.target.value))}
-            >
-              <option value={10}>10 menit</option>
-              <option value={20}>20 menit</option>
-              <option value={30}>30 menit</option>
-            </select>
-          </label>
-          <button
-            disabled={!loaded}
-            className="button primary"
-            onClick={() => {
-              setSession({
-                deadline: Date.now() + minutes * 60000,
-                answers: {},
-                finished: false,
-              });
-              setRemaining(minutes * 60);
-            }}
-          >
-            <Play size={16} />
-            Mulai simulasi
-          </button>
-          <small>
-            Untuk simulasi proyek penuh, diskusikan durasi 270/290 menit yang
-            berbeda dalam dokumen dengan guru.
-          </small>
-        </section>
-      ) : (
-        <>
-          <div className="exam-bar">
-            <strong>
-              {session.finished
-                ? `Hasil: ${score}/${quiz.length} (${score * 10}%)`
-                : `${Object.keys(session.answers).length}/${quiz.length} dijawab`}
-            </strong>
-            <span>
-              <Clock size={17} />
-              {session.finished
-                ? "Simulasi selesai"
-                : `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`}
-            </span>
-            {session.finished ? (
-              <button
-                className="button secondary"
-                onClick={() => setSession(null)}
-              >
-                Latihan ulang
-              </button>
-            ) : (
-              <button
-                className="button primary"
-                onClick={async () => {
-                  if (
-                    await confirm({
-                      title: "Kumpulkan jawaban?",
-                      description:
-                        "Jawaban yang dikumpulkan tidak dapat diubah. Soal kosong dihitung salah. Waktu simulasi tetap berjalan selama dialog terbuka.",
-                      accept: "Kumpulkan sekarang",
-                      details: [
-                        `${Object.keys(session.answers).length} dari ${quiz.length} soal sudah dijawab`,
-                        `${quiz.length - Object.keys(session.answers).length} soal belum dijawab`,
-                      ],
-                    })
-                  )
-                    finish();
-                }}
-              >
-                Kumpulkan jawaban
-              </button>
-            )}
-          </div>
-          <div className="quiz-list">
-            {quiz.map((q, i) => (
-              <fieldset className="panel quiz-card" key={q.id}>
-                <legend>
-                  {i + 1}. {q.q}
-                </legend>
-                {q.options.map((option, j) => (
-                  <label
-                    key={j}
-                    className={`quiz-option ${session.answers[i] === j ? "chosen" : ""} ${session.finished && j === q.correct ? "correct" : ""}`}
-                  >
-                    <input
-                      type="radio"
-                      name={`question-${i}`}
-                      checked={session.answers[i] === j}
-                      disabled={session.finished}
-                      onChange={() => {
-                        if (Date.now() >= session.deadline) {
-                          finish();
-                          return;
-                        }
-                        setSession({
-                          ...session,
-                          answers: { ...session.answers, [i]: j },
-                        });
-                      }}
-                    />
-                    <span>{option}</span>
-                    {session.finished && j === q.correct ? (
-                      <Check size={18} />
-                    ) : null}
-                  </label>
-                ))}
-                {session.finished ? (
-                  <p className="feedback">
-                    {session.answers[i] === q.correct
-                      ? "Benar."
-                      : "Perlu diulang."}{" "}
-                    {q.a}
-                  </p>
-                ) : null}
-              </fieldset>
-            ))}
-          </div>
-        </>
-      )}
+      <Link href="/keamanan" className="button secondary">
+        Kelola data & pemulihan →
+      </Link>
     </>
   );
 }
@@ -804,3 +457,5 @@ export function References() {
     </>
   );
 }
+
+

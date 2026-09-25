@@ -11,7 +11,20 @@ export type Snapshot = {
 export function parseBackup(text: string): Progress {
   if (new TextEncoder().encode(text).length > 2000000)
     throw new Error("Cadangan melebihi 2 MB.");
-  const raw: unknown = JSON.parse(text);
+  let raw: unknown = JSON.parse(text);
+  if (raw && typeof raw === "object" && !Array.isArray(raw) && "app" in raw) {
+    if (
+      raw.app !== "EduCode Hub" ||
+      !("version" in raw) ||
+      raw.version !== 1 ||
+      !("exportedAt" in raw) ||
+      typeof raw.exportedAt !== "string" ||
+      !Number.isFinite(Date.parse(raw.exportedAt)) ||
+      !("data" in raw)
+    )
+      throw new Error("Metadata cadangan tidak valid.");
+    raw = raw.data;
+  }
   if (
     !raw ||
     typeof raw !== "object" ||
@@ -97,4 +110,17 @@ export function replaceWithRecovery(
     else store.setItem(QUARANTINE_KEY, previous);
   }
   return guardedSave(store, previous, data);
+}
+
+export function serializeBackup(data: Progress) {
+  return JSON.stringify(
+    {
+      app: "EduCode Hub",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      data: normalizeProgress(data),
+    },
+    null,
+    2,
+  );
 }
